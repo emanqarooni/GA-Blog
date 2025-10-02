@@ -1,0 +1,26 @@
+<%- include("../partials/_navbar.ejs") %>
+<h1>Create a new account</h1>
+
+<form action="/auth/sign-up" method="post">
+<label for="username">Username</label>
+<input type="text" name="username" id="username">
+<br>
+
+<label for="password">Password</label>
+<input type="password" name="password" id="password">
+<br>
+
+<label for="confirmPassword">Confirm Password</label>
+<input type="password" name="confirmPassword" id="confirmPassword">
+<br>
+<label for="first_name">First Name</label>
+<input type="text" name="first_name" id="first_name">
+<br>
+<label for="last_name">Last Name</label>
+<input type="text" name="last_name" id="last_name">
+<br>
+<label for="image">Image</label>
+<input type="file" id="fileInput" accept="image">
+<br>
+<button type="submit">SignUp</button>
+</form>
