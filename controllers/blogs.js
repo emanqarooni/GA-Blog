@@ -61,3 +61,30 @@ exports.fav_delete = async (req, res) => {
   })
   res.redirect(`/blogs/${req.params.blogId}`)
 }
+
+exports.blog_edit_get = async (req, res) => {
+  const blog = await Blog.findById(req.params.blogId).populate("owner")
+  res.render("blogs/edit.ejs", { blog })
+}
+
+exports.blog_update_put = async (req, res) => {
+  const blog = await Blog.findById(req.params.blogId)
+
+  blog.description = req.body.description
+
+  //appending new images to existing images
+  if (req.files && req.files["images"]) {
+    const newImages = req.files["images"].map(file => file.path)
+    blog.images = [...blog.images, ...newImages]
+  }
+
+
+  //replace old video
+  if (req.files && req.files["video"]) {
+    blog.video = req.files["video"][0].path
+  }
+
+  await blog.save()
+
+  res.redirect(`/blogs`)
+}
