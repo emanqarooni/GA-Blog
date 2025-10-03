@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 
 //the schema is from the mongoose library
 const blogsSchema = new mongoose.Schema({
-  image: [{
+  images: [{
     type: String
   }],
   video: {
