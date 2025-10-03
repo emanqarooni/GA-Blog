@@ -18,7 +18,6 @@ const isSignedIn = require("./middleware/is-signed-in")
 const db = require('./config/db')
 
 //Use middlewares
-app.use(express.static('public'))
 app.use(logger("dev"))
 app.use(methodOverride("_method"))
 app.use(
@@ -30,7 +29,7 @@ app.use(
 )
 app.use(passUserToView)
 app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public')) //styling
 //add static route for file medias
 app.use('/uploads', express.static('uploads'))
