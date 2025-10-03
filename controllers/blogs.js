@@ -1,10 +1,6 @@
 //require blogs model
 const Blog = require("../models/blog")
 
-//require multer
-const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
-
 //API's functionality
 
 //show all blogs from all users
@@ -39,4 +35,29 @@ exports.blog_create_post = async (req, res) => {
 
   await Blog.create(req.body)
   res.redirect("/blogs")
+}
+
+exports.blog_show_get = async (req, res) => {
+  const blog = await Blog.findById(req.params.blogId).populate("owner")
+
+  const userHasFavorited = blog.favoritedByUsers.some(user =>
+    user.equals(req.session.user._id)
+  )
+
+  res.render("blogs/details.ejs", { blog, userHasFavorited })
+}
+
+exports.fav_create_post = async (req, res) => {
+  await Blog.findByIdAndUpdate(req.params.blogId, {
+    $push: {favoritedByUsers: req.params.userId}
+  })
+
+  res.redirect(`/blogs/${req.params.blogId}`)
+}
+
+exports.fav_delete = async (req, res) => {
+  await Blog.findByIdAndUpdate(req.params.blogId, {
+    $pull: {favoritedByUsers: req.params.userId}
+  })
+  res.redirect(`/blogs/${req.params.blogId}`)
 }
