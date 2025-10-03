@@ -24,8 +24,21 @@ exports.auth_signup_post = async (req, res) => {
   const hashedPassword = bcrypt.hashSync(req.body.password, 10)
   req.body.password = hashedPassword
 
+  let imageUrl
+  if(req.body.gender === "Female"){
+    imageUrl = "https://wallpapers.com/images/hd/funny-profile-picture-i0ycvblvrynk5dh3.jpg"
+  } else {
+    imageUrl ="https://wallpapers.com/images/hd/funny-profile-picture-ylwnnorvmvk2lna0.jpg"
+  }
+
   //register the user
-  const user = await User.create(req.body)
+  const user = await User.create({
+    username: req.body.username,
+    password: hashedPassword,
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    gender: req.body.gender
+  })
   res.send(`Thanks for signing up ${user.username}`)
 }
 
@@ -63,3 +76,4 @@ exports.auth_signout_get = async (req, res) => {
   req.session.destroy()
   res.redirect("/auth/sign-in")
 }
+

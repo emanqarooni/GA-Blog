@@ -43,6 +43,9 @@ const blogRouter = require("./routes/blogs")
 app.use("/auth", authRouter)
 app.use("/blogs", isSignedIn, blogRouter)
 
+// const userRouter = require('./routes/users.js')
+// app.use('/users', userRouter)
+
 //setting up main route
 app.get("/", (req, res) => {
   res.render("index.ejs")
