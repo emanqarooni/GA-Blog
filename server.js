@@ -4,8 +4,6 @@ const express = require("express")
 const app = express()
 //require libraries
 const logger = require("morgan")
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
 const methodOverride = require("method-override")
 const session = require("express-session")
 require('dotenv').config()
