@@ -37,7 +37,8 @@ exports.auth_signup_post = async (req, res) => {
     password: hashedPassword,
     first_name: req.body.first_name,
     last_name: req.body.last_name,
-    gender: req.body.gender
+    gender: req.body.gender,
+    image: imageUrl
   })
   res.send(`Thanks for signing up ${user.username}`)
 }
