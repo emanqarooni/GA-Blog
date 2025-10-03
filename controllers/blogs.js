@@ -14,8 +14,9 @@ exports.all_blogs_get = async (req, res) => {
 }
 
 //show only the user's own blogs
-exports.blog_index_get = async (req, res) => {
-
+exports.user_blogs_get = async (req, res) => {
+  const blogs = await Blog.find({ owner: req.session.user._id }).populate("owner")
+  res.render("blogs/userBlogs.ejs", { blogs })
 }
 
 exports.blog_create_get = async (req, res) => {
