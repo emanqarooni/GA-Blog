@@ -61,3 +61,8 @@ exports.fav_delete = async (req, res) => {
   })
   res.redirect(`/blogs/${req.params.blogId}`)
 }
+
+exports.blog_edit_get = async (req, res) => {
+  const blog = await Blog.findById(req.params.blogId).populate("owner")
+  res.render("blogs/edit.ejs", { blog })
+}
