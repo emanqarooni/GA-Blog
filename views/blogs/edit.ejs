@@ -1,0 +1,34 @@
+<%- include("../partials/_navbar.ejs") %>
+<h1> Edit Blog</h1>
+
+<form action="/blogs/<%= blog._id %>?_method=PUT" enctype="multipart/form-data" method="post">
+  <label for="description">Description</label>
+  <input type="text" name="description" id="description" value="<%= blog.description %>">
+  <br>
+
+  <% if (blog.images && blog.images.length > 0) { %>
+    <p>Current Images:</p>
+    <% blog.images.forEach(img => { %>
+      <img src="/<%= img %>" width="150">
+    <% }) %>
+  <% } %>
+  <br>
+
+  <label for="images">Upload Images (Multiple Allowed): </label>
+  <input type="file" name="images" multiple accept="image/*">
+  <br>
+
+  <% if (blog.video) { %>
+    <p>Current Video:</p>
+    <video controls width="300">
+      <source src="/<%= blog.video %>" type="video/mp4">
+    </video>
+  <% } %>
+  <br>
+
+  <label for="video">Upload Video (One Allowed): </label>
+  <input type="file" name="video" accept="video/*">
+  <br>
+
+  <button type="submit">Edit Blog</button>
+</form>
