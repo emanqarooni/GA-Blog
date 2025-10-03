@@ -88,3 +88,8 @@ exports.blog_update_put = async (req, res) => {
 
   res.redirect(`/blogs`)
 }
+
+exports.blog_delete = async (req, res) => {
+  await Blog.findByIdAndDelete(req.params.blogId)
+  res.redirect("userBlogs")
+}
