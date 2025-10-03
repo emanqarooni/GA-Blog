@@ -18,6 +18,9 @@ router.get("/", blogCtrl.all_blogs_get)
 router.get("/create", blogCtrl.blog_create_get)
 router.post("/", multiUpload, blogCtrl.blog_create_post)
 router.get("/userBlogs", blogCtrl.user_blogs_get)
+router.get("/:blogId", blogCtrl.blog_show_get)
+router.post("/:blogId/favorited-by/:userId", blogCtrl.fav_create_post)
+router.delete("/:blogId/favorited-by/:userId", blogCtrl.fav_delete)
 
 //export
 module.exports = router

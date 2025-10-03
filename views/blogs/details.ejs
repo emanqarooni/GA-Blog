@@ -1,0 +1,38 @@
+<%- include("../partials/_navbar.ejs") %>
+
+<h1>Blog Details</h1>
+
+<div>
+  <div>
+    <img src="<%= blog.owner.image %>" alt="profile picture" width="50">
+    <p><%= blog.owner.username %></p>
+    <p>Created at: <%= blog.createdAt.toLocaleString() %></p>
+  </div>
+
+  <h3>Favorited by <%= blog.favoritedByUsers.length %> people</h3>
+  <% if (user) { %>
+    <% if (userHasFavorited) { %>
+      <form action="/blogs/<%= blog._id %>/favorited-by/<%= user._id %>?_method=DELETE" method="post">
+        <button type="submit">Unfavorite</button>
+      </form>
+    <% } else { %>
+      <form action="/blogs/<%= blog._id %>/favorited-by/<%= user._id %>" method="post">
+        <button type="submit">Favorite</button>
+      </form>
+    <% } %>
+  <% } %>
+
+  <p>Description: <%= blog.description %></p>
+
+  <% if (blog.images && blog.images.length > 0) { %>
+    <% blog.images.forEach(img => { %>
+      <img src="/<%= img %>" width="200">
+    <% }) %>
+  <% } %>
+
+  <% if (blog.video) { %>
+    <video controls width="300">
+      <source src="/<%= blog.video %>" type="video/mp4">
+    </video>
+  <% } %>
+</div>

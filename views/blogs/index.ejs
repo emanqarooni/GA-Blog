@@ -7,6 +7,7 @@
     <div>
       <img src="<%= blog.owner.image %>" alt="profile picture" width="50">
       <p><%= blog.owner.username %></p>
+      <p>Created at: <%= blog.createdAt.toLocaleString() %></p>
     </div>
     <p><%= blog.description %></p>
     <% if (blog.images && blog.images.length > 0) { %>
@@ -19,5 +20,6 @@
         <source src="/<%= blog.video %>" type="video/mp4">
       </video>
     <% } %>
+    <a href="/blogs/<%= blog._id %>">Details</a>
   </div>
 <% }) %>
