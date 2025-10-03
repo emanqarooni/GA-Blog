@@ -1,0 +1,18 @@
+<%- include("../partials/_navbar.ejs") %>
+<h1> Add a Blog</h1>
+
+<form action="/blogs" enctype="multipart/form-data" method="post">
+  <label for="description">Description</label>
+  <input type="text" name="description" id="description">
+  <br>
+
+  <label for="images">Upload Images (Multiple Allowed): </label>
+  <input type="file" name="images" multiple accept="image/*">
+  <br>
+
+  <label for="video">Upload Video (One Allowed): </label>
+  <input type="file" name="video" accept="video/*">
+  <br>
+
+  <button type="submit">Add Blog</button>
+</form>

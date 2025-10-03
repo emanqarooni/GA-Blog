@@ -1,7 +1,9 @@
 <nav>
   <% if (user) { %>
   <p>welcome to the <%= user.username %></p>
-  <a href="users/profile"></a>
+  <a href="/blogs/create">Add a new Blog</a>
+  <a href="/blogs/userBlogs">My Blogs</a>
+  <a href="/blogs">All Blogs</a>
   <a href="/auth/sign-out">Sign Out</a>
   <% } else { %>
   <p>welcome to the App. Guest</p>
