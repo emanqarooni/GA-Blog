@@ -1,6 +1,7 @@
 <nav>
   <% if (user) { %>
   <p>welcome to the <%= user.username %></p>
+  <a href="users/profile"></a>
   <a href="/auth/sign-out">Sign Out</a>
   <% } else { %>
   <p>welcome to the App. Guest</p>
