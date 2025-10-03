@@ -31,17 +31,19 @@ app.use(
 app.use(passUserToView)
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use((req, res, next) => {
-  res.locals.user = req.session.user
-  next()
-})
+// app.use((req, res, next) => {
+//   res.locals.user = req.session.user
+//   next()
+// })
 app.use(express.static('public')) //styling
 
 //setting up routers
 const authRouter = require("./routes/auth")
+const blogRouter = require("./routes/blogs")
 
 //using routers
 app.use("/auth", authRouter)
+app.use("/blogs", isSignedIn, blogRouter)
 
 //setting up main route
 app.get("/", (req, res) => {
