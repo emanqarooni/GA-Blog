@@ -14,7 +14,7 @@ const multiUpload = upload.fields([
 ])
 
 //routes
-router.get("/", blogCtrl.blog_index_get)
+router.get("/", blogCtrl.all_blogs_get)
 router.get("/create", blogCtrl.blog_create_get)
 router.post("/", multiUpload, blogCtrl.blog_create_post)
 
