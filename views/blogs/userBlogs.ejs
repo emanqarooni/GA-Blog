@@ -1,0 +1,28 @@
+<%- include("../partials/_navbar.ejs") %>
+
+<h1>My Blogs</h1>
+
+<a href="/blogs/create">Add Blog</a>
+
+<% blogs.forEach(blog => { %>
+  <div>
+    <div>
+      <img src="<%= blog.owner.image %>" alt="profile picture" width="50">
+      <p><%= blog.owner.username %></p>
+      <p>Created at: <%= blog.createdAt.toLocaleString() %></p>
+    </div>
+    <p><%= blog.description %></p>
+    <% if (blog.images && blog.images.length > 0) { %>
+      <% blog.images.forEach(img => { %>
+        <img src="/<%= img %>" width="200">
+      <% }) %>
+    <% } %>
+    <% if (blog.video) { %>
+      <video controls width="300">
+        <source src="/<%= blog.video %>" type="video/mp4">
+      </video>
+    <% } %>
+
+    <a href="/blogs/<%= blog._id %>">Details</a>
+  </div>
+<% }) %>
