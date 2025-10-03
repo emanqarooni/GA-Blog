@@ -1,2 +1,23 @@
 <%- include("../partials/_navbar.ejs") %>
-<h1>gggggg</h1>
+
+<h1>All Blogs</h1>
+
+<% blogs.forEach(blog => { %>
+  <div>
+    <div>
+      <img src="<%= blog.owner.image %>" alt="profile picture" width="50">
+      <p><%= blog.owner.username %></p>
+    </div>
+    <p><%= blog.description %></p>
+    <% if (blog.images && blog.images.length > 0) { %>
+      <% blog.images.forEach(img => { %>
+        <img src="/<%= img %>" width="200">
+      <% }) %>
+    <% } %>
+    <% if (blog.video) { %>
+      <video controls width="300">
+        <source src="/<%= blog.video %>" type="video/mp4">
+      </video>
+    <% } %>
+  </div>
+<% }) %>
