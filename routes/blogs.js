@@ -17,6 +17,7 @@ const multiUpload = upload.fields([
 router.get("/", blogCtrl.all_blogs_get)
 router.get("/create", blogCtrl.blog_create_get)
 router.post("/", multiUpload, blogCtrl.blog_create_post)
+router.get("/userBlogs", blogCtrl.user_blogs_get)
 
 //export
 module.exports = router
