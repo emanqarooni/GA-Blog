@@ -6,6 +6,7 @@
   <div>
     <img src="<%= blog.owner.image %>" alt="profile picture" width="50">
     <p><%= blog.owner.username %></p>
+    <p>Created at: <%= blog.createdAt.toLocaleString() %></p>
   </div>
 
   <h3>Favorited by <%= blog.favoritedByUsers.length %> people</h3>
