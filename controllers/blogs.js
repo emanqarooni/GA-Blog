@@ -86,7 +86,7 @@ exports.blog_update_put = async (req, res) => {
 
   await blog.save()
 
-  res.redirect(`/blogs`)
+  res.redirect("/blogs")
 }
 
 exports.blog_delete = async (req, res) => {
