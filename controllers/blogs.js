@@ -74,8 +74,9 @@ exports.blog_update_put = async (req, res) => {
 
   //appending new images to existing images
   if (req.files && req.files["images"]) {
-    const newImages = req.files["images"].map(file => file.path)
-    blog.images = [...blog.images, ...newImages]
+    req.files["images"].forEach((file) => {
+      blog.images.push(file.path)
+    })
   }
 
 
