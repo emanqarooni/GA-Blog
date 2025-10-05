@@ -40,7 +40,7 @@ exports.auth_signup_post = async (req, res) => {
     gender: req.body.gender,
     image: imageUrl
   })
-  res.send(`Thanks for signing up ${user.username}`)
+  res.redirect("/")
 }
 
 exports.auth_signin_get = async (req, res) => {

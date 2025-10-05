@@ -2,8 +2,8 @@ const router = require("express").Router()
 
 const userCtrl = require("../controllers/users")
 
-router.get("/profile",userCtrl.user_profile_get)
-
+router.get('/:userId',userCtrl.user_show_get)
+router.get('/:userId/edit',userCtrl.user_edit_get)
 
 
 
