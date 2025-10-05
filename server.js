@@ -26,7 +26,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public')) //styling
 //add static route for file medias
-app.use('/uploads', express.static('uploads'))
+app.use('/public/uploads', express.static('public/uploads'))
 //setting up routers
 const authRouter = require("./routes/auth")
 const blogRouter = require("./routes/blogs")
