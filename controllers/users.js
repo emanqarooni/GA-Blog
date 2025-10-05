@@ -16,6 +16,6 @@ exports.user_update_put = async (req, res) =>{
   const user =await User.findById(req.params.userId)
   user.set(req.body)
   await user.save()
-  res.redirect(`/users/${req.params.userId}`)
+  res.redirect(`/users/profile/${req.params.userId}`)
 
 }
