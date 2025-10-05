@@ -72,13 +72,14 @@ exports.blog_update_put = async (req, res) => {
 
   blog.description = req.body.description
 
-  //appending new images to existing images
+  //appending new images to existing images and checking for duplicate images using the image filenames
   if (req.files && req.files["images"]) {
     req.files["images"].forEach((file) => {
-      blog.images.push(file.path)
+    const fileAlreadyExist = blog.images.some((img) => img.includes(file.originalname))
+      if (!fileAlreadyExist){
+      blog.images.push(file.path)}
     })
   }
-
 
   //replace old video
   if (req.files && req.files["video"]) {
