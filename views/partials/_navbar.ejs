@@ -1,7 +1,7 @@
 <nav>
   <% if (user) { %>
   <p>welcome to the <%= user.username %></p>
-  <a href="/users/profile">Profile</a>
+  <a href="/users/profile/<%= user._id %>">Profile</a>
   <a href="/blogs/create">Add a new Blog</a>
   <a href="/blogs/userBlogs">My Blogs</a>
   <a href="/blogs">All Blogs</a>
