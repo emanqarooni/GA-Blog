@@ -52,6 +52,13 @@
       <div>
         <p><%= comment.owner.username %> - <%= comment.createdAt.toLocaleString() %></p>
         <p><%= comment.message %></p>
+
+        <% if( user && user._id.toString() === comment.owner._id.toString() ) { %>
+          <form action="/comments/<%= comment._id %>?_method=PUT" method="POST">
+            <input type="text" name="message" value="<%= comment.message %>" required>
+            <button type="submit">Edit</button>
+          </form>
+        <% } %>
       </div>
     <% }) %>
   <% } %>
