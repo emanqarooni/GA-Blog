@@ -19,7 +19,7 @@ exports.auth_signup_post = async (req, res) => {
   if (req.body.password !== req.body.confirmPassword) {
     return res.send("Password and confirm password must match")
   }
-  
+
   //encrypt password
   //the number 10 is 10 salting/round of encryption
   //max 15 and min 5
@@ -49,31 +49,7 @@ exports.auth_signup_post = async (req, res) => {
 exports.auth_signin_get = async (req, res) => {
   res.render("auth/sign-in.ejs")
 }
-exports.user_forgetpass_get = async (req, res) =>{
-    // Create a test account or replace with real credentials.
-const transporter = nodemailer.createTransport({
-  host: "smtp.ethereal.email",
-  port: 587,
-  secure: false, // true for 465, false for other ports
-  auth: {
-    user: "rabab177hasan@gmail.com",
-    pass: "123",
-  },
-});
 
-// Wrap in an async IIFE so we can use await.
-(async () => {
-  const info = await transporter.sendMail({
-    from: '"Maddison Foo Koch" <rabab177hasan@gmail.com>',
-    to: "emanqarooni1@gmail.com, emanqarooni1@gmail.com ",
-    subject: "Hello ✔",
-    text: "Hello world?", // plain‑text body
-    html: "<b>Hello world?</b>", // HTML body
-  });
-
-  console.log("Message sent:", info.messageId);
-})();
-}
 exports.auth_signin_post = async (req, res) => {
   //checking if the username exists or not
   const userInDatabase = await User.findOne({ username: req.body.username })
@@ -105,3 +81,7 @@ exports.auth_signout_get = async (req, res) => {
   res.redirect("/auth/sign-in")
 }
 
+//here i will do the forget password functionality
+exports.auth_forgetpass_get = async (req, res) => {
+  res.render(auth/forget-password.ejs)
+}
