@@ -1,6 +1,16 @@
+<%- include("../partials/_header.ejs") %>
 <%- include("../partials/_navbar.ejs") %>
 
 <h1>All Blogs</h1>
+
+<form action="/blogs/search" method="get">
+  <input type="text" name="username" placeholder="Search by username">
+  <button type="submit">Search</button>
+</form>
+
+<% if (blogs.length === 0) { %>
+  <p>No blogs found.</p>
+<% } %>
 
 <% blogs.forEach(blog => { %>
   <div>
@@ -23,3 +33,5 @@
     <a href="/blogs/<%= blog._id %>">Details</a>
   </div>
 <% }) %>
+
+<%- include("../partials/_footer.ejs") %>

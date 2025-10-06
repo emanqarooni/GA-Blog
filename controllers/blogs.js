@@ -1,5 +1,6 @@
 //require blogs model
 const Blog = require("../models/blog")
+const User = require("../models/user")
 
 //API's functionality
 
@@ -94,4 +95,24 @@ exports.blog_update_put = async (req, res) => {
 exports.blog_delete = async (req, res) => {
   await Blog.findByIdAndDelete(req.params.blogId)
   res.redirect("userBlogs")
+}
+
+exports.blogs_search_get = async (req, res) => {
+  const username = req.query.username //get the name from the search box
+  let blogs = [] //this is where the blogs will be display
+
+  if (username) {
+    //find the user with that username
+    const user = await User.findOne({ username: username })
+    if (user) {
+      //find all tha blogs that belong to that user
+      blogs = await Blog.find({ owner: user._id }).populate("owner")
+    }
+  }
+  else {
+    //if nothing is searched then show all blogs
+    blogs = await Blog.find().populate("owner")
+  }
+
+  res.render("blogs/index.ejs", { blogs })
 }
