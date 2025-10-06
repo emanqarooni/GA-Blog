@@ -84,19 +84,20 @@ exports.auth_signout_get = async (req, res) => {
 }
 
 //here i will do the forget password functionality
+//I used this website for help / https://medium.com/@kanishksinghmaurya/reset-password-forget-password-implementation-using-node-js-mongodb-nodemailer-jwt-7b2fe9597ca1
 exports.auth_forgetpass_get = async (req, res) => {
   res.render("auth/forget-password.ejs")
 }
 exports.auth_forgetpass_post = async (req, res) => {
-  const { gmail } = req.body
-  const user = await User.findOne({ gmail })
+  const gmail = req.body
+  const user = await User.findOne(gmail)
   if (!user) {
     return res.send("email not found")
   }
 
   const token = crypto.randomBytes(20).toString("hex")
   user.resetPasswordToken = token
-  user.resetPasswordExpires = Date.now()+ 3600000
+  user.resetPasswordExpires = Date.now() + 3600000
   await user.save()
 
   const transporter = nodemailer.createTransport({
@@ -108,18 +109,30 @@ exports.auth_forgetpass_post = async (req, res) => {
   })
   const resetLink = `http://localhost:3000/auth/forget-password/${token}`
 
-const mailOptions = {
-  from: process.env.EMAIL_USER,
-  to: user.gmail,
-  subject: "Password Reset Request",
-  html:`
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: user.gmail,
+    subject: "Password Reset Request",
+    html: `
   <p> Hello ${user.username},</p>
   <p> Click here to reset your password</p>
   <a href="${resetLink}">${resetLink}</a>
   `,
+  }
+
+  await transporter.sendMail(mailOptions)
+  res.send("Password reset email is sent")
 }
 
-await transporter.sendMail(mailOptions)
-res.send("Password reset email is sent")
+//now to put a new password
+exports.auth_newpass_get = async (req, res) => {
+  const token = req.params.token
 
+  const use = await User.findOne({
+    resetPasswordToken: token
+  })
+  if (!user|| user.resetPasswordExpires<Date.now()){
+    return res.send("Password reset token is invalid or has expired")
+  }
+  res.render("auth/new-password.ejs",{token})
 }
