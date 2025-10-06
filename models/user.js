@@ -11,6 +11,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    gmail:{
+      type:String,
+      required: true,
+    },
+
     first_name: {
       type: String,
       required: true,
@@ -28,6 +33,13 @@ const userSchema = new mongoose.Schema(
     image: {
       type: String,
     },
+    newPasswordToken: {
+      type: String
+    },
+    newPasswordExpires: {
+      type: Date
+    }
+
   },
   {
     timestamps: true, //createdAt, updatedAt: if i want to create a record, you should be logging the when data is created and what time it is updated

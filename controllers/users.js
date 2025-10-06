@@ -19,3 +19,4 @@ exports.user_update_put = async (req, res) =>{
   res.redirect(`/users/profile/${req.params.userId}`)
 
 }
+
