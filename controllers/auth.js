@@ -129,10 +129,34 @@ exports.auth_newpass_get = async (req, res) => {
   const token = req.params.token
 
   const use = await User.findOne({
-    resetPasswordToken: token
+    resetPasswordToken: token,
   })
-  if (!user|| user.resetPasswordExpires<Date.now()){
+  if (!user || user.resetPasswordExpires < Date.now()) {
     return res.send("Password reset token is invalid or has expired")
   }
-  res.render("auth/new-password.ejs",{token})
+  res.render("auth/new-password.ejs", { token })
+}
+exports.auth_resetpass_post = async (req, res) => {
+  const token = req.params.token
+  const password = req.body
+  const confirmPassword = req.body
+
+  const user = await User.findOne({ resetPasswordToken: token })
+
+  if (!user || user.resetPasswordExpires < Date.now()) {
+    return res.send("Token is invalid or has expired")
+  }
+
+  if (password !== confirmPassword) {
+    return res.send("Passwords do not match")
+  }
+
+  const hashedPassword = bcrypt.hashSync(password, 10)
+  user.password = hashedPassword
+
+  user.resetPasswordToken = undefined
+  user.resetPasswordExpires = undefined
+
+  await user.save()
+  res.send("You have a new password now YAY!")
 }

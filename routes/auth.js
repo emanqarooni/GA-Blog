@@ -18,4 +18,8 @@ router.get("/sign-out", authCtrl.auth_signout_get)
 router.get("/forget-password", authCtrl.auth_forgetpass_get)
 
 router.post("/forget-password",authCtrl.auth_forgetpass_post)
+
+//new password routes
+router.get("/new-password",authCtrl.auth_newpass_get)
+
 module.exports = router
