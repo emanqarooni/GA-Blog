@@ -7,13 +7,13 @@ const Comment = require("../models/comment")
 
 //show all blogs from all users
 exports.all_blogs_get = async (req, res) => {
-  const blogs = await Blog.find().populate("owner")
+  const blogs = await Blog.find().populate("owner").sort({ createdAt: -1 })
   res.render("blogs/index.ejs", { blogs })
 }
 
 //show only the user's own blogs
 exports.user_blogs_get = async (req, res) => {
-  const blogs = await Blog.find({ owner: req.session.user._id }).populate("owner")
+  const blogs = await Blog.find({ owner: req.session.user._id }).populate("owner").sort({ createdAt: -1 })
   res.render("blogs/userBlogs.ejs", { blogs })
 }
 
@@ -42,11 +42,13 @@ exports.blog_create_post = async (req, res) => {
 exports.blog_show_get = async (req, res) => {
   const blog = await Blog.findById(req.params.blogId).populate("owner")
 
+  const comments = await Comment.find({ blogId: blog._id }).populate("owner").sort({ createdAt: -1 })
+
   const userHasFavorited = blog.favoritedByUsers.some(user =>
     user.equals(req.session.user._id)
   )
 
-  res.render("blogs/details.ejs", { blog, userHasFavorited })
+  res.render("blogs/details.ejs", { blog, userHasFavorited, comments })
 }
 
 exports.fav_create_post = async (req, res) => {
