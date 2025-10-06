@@ -30,13 +30,13 @@ app.use('/public/uploads', express.static('public/uploads'))
 //setting up routers
 const authRouter = require("./routes/auth")
 const blogRouter = require("./routes/blogs")
+const userRouter = require('./routes/users.js')
+const commentRouter = require("./routes/comments")
 //using routers
 app.use("/auth", authRouter)
 app.use("/blogs", isSignedIn, blogRouter)
-
-const userRouter = require('./routes/users.js')
 app.use('/users', userRouter)
-
+app.use("/comments", isSignedIn, commentRouter)
 //setting up main route
 app.get("/", (req, res) => {
   res.render("index.ejs")

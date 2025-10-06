@@ -1,6 +1,7 @@
 //require blogs model
 const Blog = require("../models/blog")
 const User = require("../models/user")
+const Comment = require("../models/comment")
 
 //API's functionality
 

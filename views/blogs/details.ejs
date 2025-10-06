@@ -36,3 +36,10 @@
     </video>
   <% } %>
 </div>
+
+<h2>Comments</h2>
+
+<form action="/comments/<%= blog._id %>" method="POST">
+  <textarea name="message" placeholder="comment here....." required></textarea>
+  <button type="submit">Submit</button>
+</form>
