@@ -14,3 +14,8 @@ exports.comment_update_put = async (req, res) => {
   await Comment.findByIdAndUpdate(req.params.commentId, req.body)
   res.redirect(`/blogs/${req.params.blogId}`)
 }
+
+exports.comment_delete = async (req, res) => {
+  await Comment.findByIdAndDelete(req.params.commentId)
+  res.redirect(`/blogs/${req.params.blogId}`)
+}
