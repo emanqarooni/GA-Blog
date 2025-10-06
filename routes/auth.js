@@ -17,4 +17,5 @@ router.get("/sign-out", authCtrl.auth_signout_get)
 //forget password routes
 router.get("/forget-password", authCtrl.auth_forgetpass_get)
 
+router.post("/forget-password",authCtrl.auth_forgetpass_post)
 module.exports = router

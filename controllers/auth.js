@@ -1,7 +1,7 @@
 const User = require("../models/user")
 const bcrypt = require("bcrypt")
 const crypto = require("crypto")
-const nodemailer = require("nodemailer");
+const nodemailer = require("nodemailer")
 
 //API's main functionlaity/logic
 exports.auth_signup_get = async (req, res) => {
@@ -27,10 +27,12 @@ exports.auth_signup_post = async (req, res) => {
   req.body.password = hashedPassword
 
   let imageUrl
-  if(req.body.gender === "Female"){
-    imageUrl = "https://wallpapers.com/images/hd/funny-profile-picture-i0ycvblvrynk5dh3.jpg"
+  if (req.body.gender === "Female") {
+    imageUrl =
+      "https://wallpapers.com/images/hd/funny-profile-picture-i0ycvblvrynk5dh3.jpg"
   } else {
-    imageUrl ="https://wallpapers.com/images/hd/funny-profile-picture-ylwnnorvmvk2lna0.jpg"
+    imageUrl =
+      "https://wallpapers.com/images/hd/funny-profile-picture-ylwnnorvmvk2lna0.jpg"
   }
 
   //register the user
@@ -41,7 +43,7 @@ exports.auth_signup_post = async (req, res) => {
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     gender: req.body.gender,
-    image: imageUrl
+    image: imageUrl,
   })
   res.redirect("/")
 }
@@ -83,5 +85,41 @@ exports.auth_signout_get = async (req, res) => {
 
 //here i will do the forget password functionality
 exports.auth_forgetpass_get = async (req, res) => {
-  res.render(auth/forget-password.ejs)
+  res.render("auth/forget-password.ejs")
+}
+exports.auth_forgetpass_post = async (req, res) => {
+  const { gmail } = req.body
+  const user = await User.findOne({ gmail })
+  if (!user) {
+    return res.send("email not found")
+  }
+
+  const token = crypto.randomBytes(20).toString("hex")
+  user.resetPasswordToken = token
+  user.resetPasswordExpires = Date.now()+ 3600000
+  await user.save()
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  })
+  const resetLink = `http://localhost:3000/auth/forget-password/${token}`
+
+const mailOptions = {
+  from: process.env.EMAIL_USER,
+  to: user.gmail,
+  subject: "Password Reset Request",
+  html:`
+  <p> Hello ${user.username},</p>
+  <p> Click here to reset your password</p>
+  <a href="${resetLink}">${resetLink}</a>
+  `,
+}
+
+await transporter.sendMail(mailOptions)
+res.send("Password reset email is sent")
+
 }
