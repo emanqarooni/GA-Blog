@@ -3,15 +3,10 @@ const Blog = require("../models/blog")
 //showing the user his/her profile
 exports.user_show_get = async (req, res) => {
   const user = await User.findById(req.params.userId)
-
   const favoritedBlogs = await Blog.find({
     favoritedByUsers: req.params.userId
   }).populate("owner")
-
-  const favoritedBlogs = await Blog.find({
-    favoritedByUsers: req.params.userId
-  }).populate("owner")
-  res.render("users/profile.ejs", { user, favoritedBlogs, favoritedBlogs })
+  res.render("users/profile.ejs", { user, favoritedBlogs })
 }
 //edit profile
 exports.user_edit_get = async (req, res) => {
