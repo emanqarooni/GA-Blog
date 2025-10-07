@@ -15,6 +15,15 @@ exports.auth_signup_post = async (req, res) => {
     return res.send("Username is already taken")
   }
 
+  const password = req.body.password
+
+  let hasUppercase = /[A-Z]/.test(password)
+  let hasLowercase = /[a-z]/.test(password)
+  let hasNumber = /[0-9]/.test(password)
+
+  if(!hasUppercase || !hasLowercase || !hasNumber){
+    return res.send("Password must include atleast one capital letter, one small letter and one number ")
+  }
   //checking if the password and confirmpass are matching or not
   if (req.body.password !== req.body.confirmPassword) {
     return res.send("Password and confirm password must match")
@@ -89,8 +98,10 @@ exports.auth_forgetpass_get = async (req, res) => {
   res.render("auth/forget-password.ejs")
 }
 exports.auth_forgetpass_post = async (req, res) => {
-  const gmail = req.body
-  const user = await User.findOne(gmail)
+  const { gmail } = req.body
+
+  const user = await User.findOne({ gmail })
+
   if (!user) {
     return res.send("email not found")
   }
@@ -100,6 +111,8 @@ exports.auth_forgetpass_post = async (req, res) => {
   user.resetPasswordExpires = Date.now() + 3600000
   await user.save()
 
+  const resetLink = `http://localhost:3000/auth/new-password/${token}`
+
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -107,9 +120,8 @@ exports.auth_forgetpass_post = async (req, res) => {
       pass: process.env.EMAIL_PASS,
     },
   })
-  const resetLink = `http://localhost:3000/auth/forget-password/${token}`
 
-  const mailOptions = {
+  await transporter.sendMail({
     from: process.env.EMAIL_USER,
     to: user.gmail,
     subject: "Password Reset Request",
@@ -118,9 +130,8 @@ exports.auth_forgetpass_post = async (req, res) => {
   <p> Click here to reset your password</p>
   <a href="${resetLink}">${resetLink}</a>
   `,
-  }
+  })
 
-  await transporter.sendMail(mailOptions)
   res.send("Password reset email is sent")
 }
 
@@ -128,24 +139,27 @@ exports.auth_forgetpass_post = async (req, res) => {
 exports.auth_newpass_get = async (req, res) => {
   const token = req.params.token
 
-  const use = await User.findOne({
+  const user = await User.findOne({
     resetPasswordToken: token,
+    resetPasswordExpires: { $gt: Date.now() },
   })
-  if (!user || user.resetPasswordExpires < Date.now()) {
-    return res.send("Password reset token is invalid or has expired")
-  }
+  // if (!user || user.resetPasswordExpires < Date.now()) {
+  //   return res.send("Password reset token is invalid or has expired")
+  // }
   res.render("auth/new-password.ejs", { token })
 }
-exports.auth_resetpass_post = async (req, res) => {
+exports.auth_newpass_post = async (req, res) => {
   const token = req.params.token
-  const password = req.body
-  const confirmPassword = req.body
+  const { password, confirmPassword } = req.body
 
-  const user = await User.findOne({ resetPasswordToken: token })
+  const user = await User.findOne({
+    resetPasswordToken: token,
+    resetPasswordExpires: { $gt: Date.now() },
+  })
 
-  if (!user || user.resetPasswordExpires < Date.now()) {
-    return res.send("Token is invalid or has expired")
-  }
+  // if (!user || user.resetPasswordExpires < Date.now()) {
+  //   return res.send("Token is invalid or has expired")
+  // }
 
   if (password !== confirmPassword) {
     return res.send("Passwords do not match")

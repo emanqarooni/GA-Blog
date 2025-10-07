@@ -33,10 +33,10 @@ const userSchema = new mongoose.Schema(
     image: {
       type: String,
     },
-    newPasswordToken: {
+    resetPasswordToken: {
       type: String
     },
-    newPasswordExpires: {
+    resetPasswordExpires: {
       type: Date
     }
 
