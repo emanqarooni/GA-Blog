@@ -4,9 +4,17 @@
 <input type="file" name="image">
 <button type="submit">submit</button>
 </form>
+<<<<<<< HEAD
+
 <form action="/users/profile/<%=user._id %>?_method=PUT" method="POST">
 <label for="image">Profile Image:</label>
 <img src="<%=user.image%>">
+
+=======
+<form action="/users/profile/<%=user._id %>?_method=PUT" method="POST">
+<label for="image">Profile Image:</label>
+<img src="<%=user.image%>">
+>>>>>>> main
 <br>
   <label for="first_name">First Name:</label>
 <input type="text" name="first_name" id="first_name" value="<%= user.first_name  %>"                   >
@@ -17,9 +25,14 @@
   <label for="username">Username:</label>
 <input type="text" name="username" id="username" value="<%= user.username  %>" >
 <br>
+
 <label for="gender">Gender:</label>
 <input type="text" name="gender" id="gender" value="<%= user.gender %>" >
 <br>
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
 <label for="gmail">Gmail:</label>
 <input type="text" name="gmail" id="gmail" value="<%= user.gmail %>" >
 <br>
