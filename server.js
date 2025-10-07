@@ -35,7 +35,7 @@ const commentRouter = require("./routes/comments")
 //using routers
 app.use("/auth", authRouter)
 app.use("/blogs", isSignedIn, blogRouter)
-app.use('/users', userRouter)
+app.use('/users', isSignedIn, userRouter)
 app.use("/comments", isSignedIn, commentRouter)
 //setting up main route
 app.get("/", (req, res) => {
