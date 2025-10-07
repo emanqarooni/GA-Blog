@@ -11,8 +11,8 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    gmail:{
-      type:String,
+    gmail: {
+      type: String,
       required: true,
     },
 
@@ -31,7 +31,14 @@ const userSchema = new mongoose.Schema(
     },
 
     image: {
-      type: String
+      type: String,
+    },
+
+    resetPasswordToken: {
+      type: String,
+    },
+    resetPasswordExpires: {
+      type: String,
     },
   },
   {
