@@ -11,6 +11,6 @@ exports.comment_create_post = async (req, res) => {
 }
 
 exports.comment_update_put = async (req, res) => {
-  await Comment.findByIdAndUpdate(req.params.commentId, req.body)
-  res.redirect(`/blogs/${req.params.blogId}`)
+  const comment =  await Comment.findByIdAndUpdate(req.params.commentId, req.body, {new: true})
+  res.redirect(`/blogs/${comment.blogId}`)
 }
