@@ -13,4 +13,5 @@ router.post(
   upload.single("image"),
   userCtrl.user_update_put
 )
+router.put("/profile/:userId", upload.single("image"), userCtrl.user_update_put)
 module.exports = router

@@ -107,11 +107,16 @@ exports.auth_forgetpass_post = async (req, res) => {
   if (!user) {
     return res.send("email not found")
   }
-
   const token = crypto.randomBytes(20).toString("hex")
   user.resetPasswordToken = token
   user.resetPasswordExpires = Date.now() + 3600000
-  await user.save()
+  console.log("user", user)
+  console.log("user.key", user.key)
+
+  const updatedUser = await user.save()
+  console.log("updatedUser", updatedUser)
+
+  console.log("Token---", token)
 
   const resetLink = `http://localhost:3000/auth/new-password/${token}`
 
