@@ -1,9 +1,14 @@
 const User = require("../models/user")
-
+const Blog = require("../models/blog")
 //showing the user his/her profile
 exports.user_show_get = async (req, res) => {
   const user = await User.findById(req.params.userId)
-  res.render("users/profile.ejs", { user })
+
+  const favoritedBlogs = await Blog.find({
+    favoritedByUsers: req.params.userId
+  }).populate("owner")
+
+  res.render("users/profile.ejs", { user, favoritedBlogs })
 }
 
 //edit profile

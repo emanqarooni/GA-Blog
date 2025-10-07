@@ -21,8 +21,10 @@ exports.auth_signup_post = async (req, res) => {
   let hasLowercase = /[a-z]/.test(password)
   let hasNumber = /[0-9]/.test(password)
 
-  if(!hasUppercase || !hasLowercase || !hasNumber){
-    return res.send("Password must include atleast one capital letter, one small letter and one number ")
+  if (!hasUppercase || !hasLowercase || !hasNumber) {
+    return res.send(
+      "Password must include atleast one capital letter, one small letter and one number "
+    )
   }
   //checking if the password and confirmpass are matching or not
   if (req.body.password !== req.body.confirmPassword) {
@@ -150,12 +152,15 @@ exports.auth_newpass_get = async (req, res) => {
 }
 exports.auth_newpass_post = async (req, res) => {
   const token = req.params.token
+  console.log("token", token)
+
   const { password, confirmPassword } = req.body
 
   const user = await User.findOne({
     resetPasswordToken: token,
     resetPasswordExpires: { $gt: Date.now() },
   })
+  console.log("user", user)
 
   // if (!user || user.resetPasswordExpires < Date.now()) {
   //   return res.send("Token is invalid or has expired")
