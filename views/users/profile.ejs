@@ -3,10 +3,6 @@
 <h1><%= user.first_name %> <%= user.last_name %></h1>
 <p>Username: <%= user.username %></p>
 <p>Gmail: <%= user.gmail %></p>
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 <% if (user&& favoritedBlogs.length === 0) { %>
   <p>no favorites</p>
 <%} else {%>
@@ -14,10 +10,6 @@
   <ul>
   <% favoritedBlogs.forEach(blog => { %>
     <li>
-<<<<<<< HEAD
-
-=======
->>>>>>> main
     <a href="/blogs/<%= blog._id %>" > <%= blog.description %> </a>
     </li>
 <% }) %>
