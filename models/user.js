@@ -32,16 +32,7 @@ const userSchema = new mongoose.Schema(
 
     image: {
       type: String
-      // data:Buffer,
-      // contentType: String
     },
-    resetPasswordToken: {
-      type: String
-    },
-    resetPasswordExpires: {
-      type: Date
-    }
-
   },
   {
     timestamps: true, //createdAt, updatedAt: if i want to create a record, you should be logging the when data is created and what time it is updated

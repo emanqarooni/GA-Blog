@@ -1,17 +1,19 @@
 //require blogs model
 const Blog = require("../models/blog")
+const User = require("../models/user")
+const Comment = require("../models/comment")
 
 //API's functionality
 
 //show all blogs from all users
 exports.all_blogs_get = async (req, res) => {
-  const blogs = await Blog.find().populate("owner")
+  const blogs = await Blog.find().populate("owner").sort({ createdAt: -1 })
   res.render("blogs/index.ejs", { blogs })
 }
 
 //show only the user's own blogs
 exports.user_blogs_get = async (req, res) => {
-  const blogs = await Blog.find({ owner: req.session.user._id }).populate("owner")
+  const blogs = await Blog.find({ owner: req.session.user._id }).populate("owner").sort({ createdAt: -1 })
   res.render("blogs/userBlogs.ejs", { blogs })
 }
 
@@ -40,11 +42,13 @@ exports.blog_create_post = async (req, res) => {
 exports.blog_show_get = async (req, res) => {
   const blog = await Blog.findById(req.params.blogId).populate("owner")
 
+  const comments = await Comment.find({ blogId: blog._id }).populate("owner").sort({ createdAt: -1 })
+
   const userHasFavorited = blog.favoritedByUsers.some(user =>
     user.equals(req.session.user._id)
   )
 
-  res.render("blogs/details.ejs", { blog, userHasFavorited })
+  res.render("blogs/details.ejs", { blog, userHasFavorited, comments })
 }
 
 exports.fav_create_post = async (req, res) => {
@@ -94,4 +98,24 @@ exports.blog_update_put = async (req, res) => {
 exports.blog_delete = async (req, res) => {
   await Blog.findByIdAndDelete(req.params.blogId)
   res.redirect("userBlogs")
+}
+
+exports.blogs_search_get = async (req, res) => {
+  const username = req.query.username //get the name from the search box
+  let blogs = [] //this is where the blogs will be display
+
+  if (username) {
+    //find the user with that username
+    const user = await User.findOne({ username: username })
+    if (user) {
+      //find all tha blogs that belong to that user
+      blogs = await Blog.find({ owner: user._id }).populate("owner")
+    }
+  }
+  else {
+    //if nothing is searched then show all blogs
+    blogs = await Blog.find().populate("owner")
+  }
+
+  res.render("blogs/index.ejs", { blogs })
 }

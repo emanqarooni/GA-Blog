@@ -36,3 +36,34 @@
     </video>
   <% } %>
 </div>
+
+<h2>Comments</h2>
+
+<form action="/comments/<%= blog._id %>" method="POST">
+  <textarea name="message" placeholder="comment here....." required></textarea>
+  <button type="submit">Submit</button>
+</form>
+
+<div>
+  <% if (comments.length === 0) { %>
+    <p>No comments yet.</p>
+  <% } else { %>
+    <% comments.forEach(comment => { %>
+      <div>
+        <p><%= comment.owner.username %> - <%= comment.createdAt.toLocaleString() %></p>
+        <p><%= comment.message %></p>
+
+        <% if( user && user._id.toString() === comment.owner._id.toString() ) { %>
+          <form action="/comments/<%= comment._id %>?_method=PUT" method="POST">
+            <input type="text" name="message" value="<%= comment.message %>" required>
+            <button type="submit">Edit</button>
+          </form>
+
+          <form action="/comments/<%= comment._id %>?_method=DELETE" method="POST">
+            <button type="submit">Delete</button>
+          </form>
+        <% } %>
+      </div>
+    <% }) %>
+  <% } %>
+</div>
