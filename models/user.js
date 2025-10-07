@@ -31,7 +31,8 @@ const userSchema = new mongoose.Schema(
     },
 
     image: {
-      type: String,
+      data:Buffer,
+      contentType: String
     },
     resetPasswordToken: {
       type: String

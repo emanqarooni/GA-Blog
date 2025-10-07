@@ -5,12 +5,12 @@ const router = require("express").Router()
 const blogCtrl = require("../controllers/blogs")
 
 //require multer
-const upload = require("../config/multer")
+const upload = require("../middleware/multer")
 
 // handle multiple images and one video submissions
 const multiUpload = upload.fields([
   { name: "images", maxCount: 10 },
-  { name: "video", maxCount: 1 }
+  { name: "video", maxCount: 1 },
 ])
 
 //routes

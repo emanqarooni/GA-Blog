@@ -1,12 +1,17 @@
 <%- include('../partials/_navbar.ejs') %>
-
-<form action="/users/<%= user._id  %>?_method=PUT" method="POST">
-
+<form action="/users/profile/<%= user._id  %> " method="POST" enctype="multipart/form-data">
 <label for="image">Profile Image:</label>
-<input type="file" name="image" accept="image/*" >
+<input type="file" name="image">
+<button type="submit">submit</button>
+</form>
+
+<form action="/users/profile/<%=user._id %>?_method=PUT" method="POST">
+<label for="image">Profile Image:</label>
+<img src="<%=user.image%>">
+
 <br>
   <label for="first_name">First Name:</label>
-<input type="text" name="first_name" id="first_name" value="<%= user.first_name  %>" >
+<input type="text" name="first_name" id="first_name" value="<%= user.first_name  %>"                   >
 <br>
 <label for="last_name">Last Name:</label>
 <input type="text" name="last_name" id="last_name" value="<%= user.last_name  %>" >
