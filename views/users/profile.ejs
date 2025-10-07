@@ -2,5 +2,17 @@
 <img src="<%= user.image %>" alt="Profile picture" />
 <h1><%= user.first_name %> <%= user.last_name %></h1>
 <p>Username: <%= user.username %></p>
-<p>Gender: <%= user.gender %></p>
+<p>Gmail: <%= user.gmail %></p>
+<% if (user&& favoritedBlogs.length === 0) { %>
+  <p>no favorites</p>
+<%} else {%>
+  <p>Favorited Blogs</p>
+  <ul>
+  <% favoritedBlogs.forEach(blog => { %>
+    <li>
+    <a href="/blogs/<%= blog._id %>" > <%= blog.description %> </a>
+    </li>
+<% }) %>
+</ul>
+<%}%>
 <a href="/users/profile/<%= user._id  %>/edit">Edit profile</a>
