@@ -109,12 +109,12 @@ exports.blogs_search_get = async (req, res) => {
     const user = await User.findOne({ username: username })
     if (user) {
       //find all tha blogs that belong to that user
-      blogs = await Blog.find({ owner: user._id }).populate("owner")
+      blogs = await Blog.find({ owner: user._id }).populate("owner").sort({createdAt: -1})
     }
   }
   else {
     //if nothing is searched then show all blogs
-    blogs = await Blog.find().populate("owner")
+    blogs = await Blog.find().populate("owner").sort({createdAt: -1})
   }
 
   res.render("blogs/index.ejs", { blogs })
