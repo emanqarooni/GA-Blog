@@ -21,8 +21,9 @@ app.use(
     saveUninitialized: true,
   })
 )
-const path= require("path")
-app.use(express.static(path.join(__dirname, "public")))
+app.use('/public/uploads', express.static('public/uploads'))
+// const path= require("path")
+// app.use(express.static(path.join(__dirname, "public")))
 app.use(express.static("public"))
 app.use(passUserToView)
 app.use(express.json())
