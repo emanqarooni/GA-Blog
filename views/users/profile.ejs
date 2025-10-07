@@ -1,8 +1,10 @@
 <%- include('../partials/_navbar.ejs') %>
+<div class="details">
 <img src="<%= user.image %>" alt="Profile picture" />
 <h1><%= user.first_name %> <%= user.last_name %></h1>
 <p>Username: <%= user.username %></p>
 <p>Gmail: <%= user.gmail %></p>
+<div class="favorites">
 <% if (user&& favoritedBlogs.length === 0) { %>
   <p>no favorites</p>
 <%} else {%>
@@ -15,4 +17,6 @@
 <% }) %>
 </ul>
 <%}%>
+</div>
 <a href="/users/profile/<%= user._id  %>/edit">Edit profile</a>
+</div>

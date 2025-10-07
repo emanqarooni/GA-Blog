@@ -115,7 +115,6 @@ exports.auth_forgetpass_post = async (req, res) => {
 
   const updatedUser = await user.save()
   console.log("updatedUser", updatedUser)
-
   console.log("Token---", token)
 
   const resetLink = `http://localhost:3000/auth/new-password/${token}`
