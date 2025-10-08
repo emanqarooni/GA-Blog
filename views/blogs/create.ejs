@@ -1,4 +1,6 @@
+<%- include("../partials/_header.ejs") %>
 <%- include("../partials/_navbar.ejs") %>
+<div class="create-layout">
 <h1> Add a Blog</h1>
 
 <form action="/blogs" enctype="multipart/form-data" method="post">
@@ -16,3 +18,4 @@
 
   <button type="submit">Add Blog</button>
 </form>
+</div>

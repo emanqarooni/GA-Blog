@@ -58,7 +58,7 @@ h1 {
 /* --- Blog Card --- */
 .blog-card {
   background-color: #fff;
-  color:black;
+  color: black;
   border-radius: 16px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   padding: 1.5rem;
@@ -119,6 +119,193 @@ h1 {
   text-align: center;
   color: #666;
   font-style: italic;
+}
+
+/* create page */
+.create-layout {
+  max-width: 600px;
+  margin: 4rem auto;
+  padding: 2.5rem;
+  background-color: #1a1a1a;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(161, 8, 8, 0.1);
+  color: white;
+  font-family: "Alan Sans", sans-serif;
+  text-align: center;
+}
+
+/* Heading */
+.create-layout h2 {
+  font-size: 2rem;
+  color: #ed1c24;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+/* Form Layout */
+.create-layout form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Labels */
+.create-layout label {
+  width: 80%;
+  text-align: left;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+/* Input Fields */
+.create-layout input[type="text"],
+.create-layout input[type="file"] {
+  width: 80%;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #555;
+  background-color: #222;
+  color: #fff;
+  font-size: 1rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.create-layout input[type="text"]:focus,
+.create-layout input[type="file"]:focus {
+  border-color: #ed1c24;
+  background-color: #2a2a2a;
+  outline: none;
+}
+
+/* Button */
+.create-layout button {
+  width: 50%;
+  padding: 1rem;
+  background-color: #ed1c24;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.create-layout button:hover {
+  background-color: #c2171e;
+}
+/* edit page */
+.edit-blog {
+  max-width: 700px;
+  margin: 4rem auto;
+  padding: 2.5rem;
+  background-color: #1a1a1a;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(161, 8, 8, 0.1);
+  color: white;
+  font-family: "Alan Sans", sans-serif;
+  text-align: center;
+}
+
+/* Heading */
+.edit-blog h1 {
+  font-size: 2rem;
+  color: #ed1c24;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+/* Form Layout */
+.edit-blog form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Labels */
+.edit-blog label {
+  width: 90%;
+  text-align: left;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+/* Input Fields */
+.edit-blog input[type="text"],
+.edit-blog input[type="file"] {
+  width: 90%;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #555;
+  background-color: #222;
+  color: #fff;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.edit-blog input[type="text"]:focus,
+.edit-blog input[type="file"]:focus {
+  border-color: #ed1c24;
+  background-color: #2a2a2a;
+  outline: none;
+}
+
+/* Current Images Grid */
+.current-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.current-images img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #555;
+}
+
+/* Video Preview */
+.edit-blog video {
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  background-color: #000;
+}
+
+/* Button */
+.edit-blog button {
+  width: 50%;
+  padding: 1rem;
+  background-color: #ed1c24;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.edit-blog button:hover {
+  background-color: #c2171e;
+}
+
+/* Paragraphs for current media */
+.edit-blog p {
+  width: 90%;
+  text-align: left;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #ccc;
 }
 
 /* --- Responsive Design --- */
