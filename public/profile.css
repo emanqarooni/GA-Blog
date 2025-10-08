@@ -69,6 +69,7 @@ body {
   box-shadow: 0 4px 12px rgba(161, 8, 8, 0.05);
   background-color: #fff;
   padding-top: 1rem;
+  min-width: 30px;
 }
 
 .favorites p {
@@ -76,12 +77,14 @@ body {
   color: #ed1c24;
   font-weight: bold;
   margin-bottom: 1rem;
+
 }
 
 .favorites-list {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+
 }
 
 .favorite-item {
@@ -89,6 +92,10 @@ body {
   padding: 0.9rem 1rem;
   border-radius: 10px;
   transition: background-color 0.3s ease;
+   word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+
 }
 
 .favorite-item:hover {
@@ -100,6 +107,9 @@ body {
   color: #fff;
   text-decoration: none;
   font-weight: 500;
+   word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 /* now styling the the edit page */
