@@ -21,11 +21,11 @@ app.use(
     saveUninitialized: true,
   })
 )
+app.use(express.static("public"))
 app.use('/public/uploads', express.static('public/uploads'))
+app.use(passUserToView)
 // const path= require("path")
 // app.use(express.static(path.join(__dirname, "public")))
-app.use(express.static("public"))
-app.use(passUserToView)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 //setting up routers
@@ -40,10 +40,15 @@ app.use('/users', isSignedIn, userRouter)
 app.use("/comments", isSignedIn, commentRouter)
 //setting up main route
 app.get("/", (req, res) => {
-  res.render("index.ejs")
+  res.render("index.ejs", { message: null, error: null })
 })
 //port
 const PORT = process.env.PORT ? process.env.PORT : 3000
 app.listen(PORT, () => {
   console.log(`Running Server on Port ${PORT} . . . `)
 })
+
+
+
+
+

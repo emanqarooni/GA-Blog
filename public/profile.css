@@ -512,3 +512,26 @@ body {
   background-color: #c2171e;
 }
 
+.alert {
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.alert.success {
+  background-color: #e0ffe3;
+  color: #156a1f;
+  border: 1px solid #3ab94b;
+}
+
+.alert.error {
+  background-color: #ffe0e0;
+  color: #a30000;
+  border: 1px solid #d43f3f;
+}
+
+hr {
+  margin:2rem 0;
+  border:0.5px solid #555;
+}

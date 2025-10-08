@@ -12,9 +12,9 @@
     <button type="submit">Update Image</button>
   </form>
 
-  <hr style="margin:2rem 0; border:0.5px solid #555;">
+  <hr>
 
-  
+
   <form action="/users/profile/<%= user._id %>?_method=PUT" method="POST">
     <label for="first_name">First Name:</label>
     <input type="text" name="first_name" id="first_name" value="<%= user.first_name %>">
