@@ -1,1 +1,26 @@
-<%- include("./partials/_navbar.ejs") %>
+<%- include("./partials/_header.ejs") %>
+<div class="signin-layout">
+<h1>Sign In</h1>
+
+<% if (message) { %>
+  <div class="alert success"><%= message %></div>
+<% } %>
+
+<form action="/auth/sign-in" method="post">
+<label for="username">Username</label>
+<input type="text" name="username" id="username">
+<br>
+
+<label for="password">Password</label>
+<input type="password" name="password" id="password">
+<br>
+
+<button type="submit">SignIn</button>
+
+</form>
+<div class="signin-links">
+<a href="/auth/sign-up">Sign Up Here!</a>
+<br>
+<a href="/auth/forget-password">Forget Password?</a>
+</div>
+</div>

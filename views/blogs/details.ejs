@@ -1,69 +1,115 @@
+<%- include("../partials/_header.ejs") %>
 <%- include("../partials/_navbar.ejs") %>
 
-<h1>Blog Details</h1>
+<div class="blog-details-layout">
+  <h1 class="page-title">Details</h1>
 
-<div>
-  <div>
-    <img src="<%= blog.owner.image %>" alt="profile picture" width="50">
-    <p><%= blog.owner.username %></p>
-    <p>Created at: <%= blog.createdAt.toLocaleString() %></p>
-  </div>
+  <div class="blog-details-container">
+    <div class="blog-left">
+      <!-- Favorite section -->
+      <div class="fav-section">
+        <div class="fav-info">
+          Favorited by <%= blog.favoritedByUsers.length %> people
+        </div>
+        <div class="fav-star">
+          <% if (user) { %>
+            <% if (userHasFavorited) { %>
+              <form
+                action="/blogs/<%= blog._id %>/favorited-by/<%= user._id %>?_method=DELETE"
+                method="POST"
+              >
+                <button type="submit" class="star-btn active">★</button>
+              </form>
+            <% } else { %>
+              <form
+                action="/blogs/<%= blog._id %>/favorited-by/<%= user._id %>"
+                method="POST"
+              >
+                <button type="submit" class="star-btn">★</button>
+              </form>
+            <% } %>
+          <% } else { %>
+            <span class="star-btn disabled">★</span>
+          <% } %>
+        </div>
+      </div>
 
-  <h3>Favorited by <%= blog.favoritedByUsers.length %> people</h3>
-  <% if (user) { %>
-    <% if (userHasFavorited) { %>
-      <form action="/blogs/<%= blog._id %>/favorited-by/<%= user._id %>?_method=DELETE" method="post">
-        <button type="submit">Unfavorite</button>
+      <!-- Blog Description -->
+      <div class="blog-description-box">
+        <h3 class="desc-title">Description</h3>
+        <p class="desc-text"><%= blog.description %></p>
+      </div>
+
+      <!-- Blog Media -->
+      <% if (blog.images && blog.images.length > 0) { %>
+        <div class="blog-images">
+          <% blog.images.forEach(image => { %>
+            <img src="/<%= image %>" class="blog-media" alt="Blog image" />
+          <% }) %>
+        </div>
+      <% } %>
+
+      <% if (blog.video) { %>
+        <video controls class="blog-media">
+          <source src="/<%= blog.video %>" type="video/mp4" />
+        </video>
+      <% } %>
+    </div>
+
+    <!-- Comments Section -->
+    <div class="blog-right">
+      <h2>Comments</h2>
+
+      <form
+        class="comment-form"
+        action="/comments/<%= blog._id %>"
+        method="POST"
+      >
+        <textarea name="message" placeholder="Message" required></textarea>
+        <button type="submit" class="submit-btn">Submit</button>
       </form>
-    <% } else { %>
-      <form action="/blogs/<%= blog._id %>/favorited-by/<%= user._id %>" method="post">
-        <button type="submit">Favorite</button>
-      </form>
-    <% } %>
-  <% } %>
 
-  <p>Description: <%= blog.description %></p>
+      <div class="comments-list">
+        <% if (comments.length === 0) { %>
+          <p class="no-comments">No comments yet.</p>
+        <% } else { %>
+          <% comments.forEach(comment => { %>
+            <div class="comment-item">
+              <div class="comment-header">
+                <span class="comment-user">
+                  <%= comment.owner.username %>
+                </span>
+                <span class="comment-date">
+                  <%= comment.createdAt.toLocaleString() %>
+                </span>
+              </div>
 
-  <% if (blog.images && blog.images.length > 0) { %>
-    <% blog.images.forEach(img => { %>
-      <img src="/<%= img %>" width="200">
-    <% }) %>
-  <% } %>
+              <p class="comment-message"><%= comment.message %></p>
 
-  <% if (blog.video) { %>
-    <video controls width="300">
-      <source src="/<%= blog.video %>" type="video/mp4">
-    </video>
-  <% } %>
-</div>
+              <% if (user && user._id.toString() === comment.owner._id.toString()) { %>
+                <div class="comment-actions">
+                  <form
+                    action="/comments/<%= comment._id %>?_method=PUT"
+                    method="POST"
+                    class="inline-form"
+                  >
+                    <input type="text" name="message" value="<%= comment.message %>" required />
+                    <button type="submit" class="edit-btn">Edit</button>
+                  </form>
 
-<h2>Comments</h2>
-
-<form action="/comments/<%= blog._id %>" method="POST">
-  <textarea name="message" placeholder="comment here....." required></textarea>
-  <button type="submit">Submit</button>
-</form>
-
-<div>
-  <% if (comments.length === 0) { %>
-    <p>No comments yet.</p>
-  <% } else { %>
-    <% comments.forEach(comment => { %>
-      <div>
-        <p><%= comment.owner.username %> - <%= comment.createdAt.toLocaleString() %></p>
-        <p><%= comment.message %></p>
-
-        <% if( user && user._id.toString() === comment.owner._id.toString() ) { %>
-          <form action="/comments/<%= comment._id %>?_method=PUT" method="POST">
-            <input type="text" name="message" value="<%= comment.message %>" required>
-            <button type="submit">Edit</button>
-          </form>
-
-          <form action="/comments/<%= comment._id %>?_method=DELETE" method="POST">
-            <button type="submit">Delete</button>
-          </form>
+                  <form
+                    action="/comments/<%= comment._id %>?_method=DELETE"
+                    method="POST"
+                  >
+                    <button type="submit" class="delete-btn">Delete</button>
+                  </form>
+                </div>
+              <% } %>
+            </div>
+          <% }) %>
         <% } %>
       </div>
-    <% }) %>
-  <% } %>
+    </div>
+  </div>
 </div>
+

@@ -1,0 +1,146 @@
+/* ================================
+   NAVIGATION BAR
+================================ */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 0.8rem 2rem;
+  color: black;
+  font-family: "Alan Sans", sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Left section (logo) */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-left img {
+  height: 35px;
+}
+
+/* Center navigation links */
+.nav-center {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-center a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  font-size: 1rem;
+  position: relative;
+}
+
+.nav-center a:hover {
+  color: #ed1c24;
+}
+
+/* Underline hover effect */
+.nav-center a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #ed1c24;
+  transition: width 0.3s ease;
+}
+
+.nav-center a:hover::after {
+  width: 100%;
+}
+
+/* Right section: profile image + dropdown */
+.nav-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Profile picture styling */
+.profile-pic {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid #555;
+  transition: all 0.2s ease;
+}
+
+.profile-pic:hover {
+  border-color: #ed1c24;
+  transform: scale(1.05);
+}
+
+/* ================================
+   PROFILE DROPDOWN
+================================ */
+.profile-dropdown {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  padding: 1rem 0;
+  z-index: 200;
+  transition: all 0.2s ease;
+}
+
+/* Link styling inside dropdown */
+.profile-dropdown a {
+  width: 100%;
+  text-align: center;
+  color: black;
+  text-decoration: none;
+  padding: 0.8rem 0;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.profile-dropdown a:hover {
+  background-color: #ed1c24;
+  color: white;
+}
+
+/* Show dropdown when active */
+.profile-dropdown.active {
+  display: flex;
+  animation: dropdownFade 0.25s ease forwards;
+}
+
+.profile-dropdown-username {
+  color:#ed1c24;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+/* Fade and slide animation */
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

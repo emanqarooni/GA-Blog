@@ -1,12 +1,14 @@
 <%- include("../partials/_header.ejs") %>
 <%- include("../partials/_navbar.ejs") %>
 
+<div class="blog-top">
 <h1>All Blogs</h1>
 
 <form action="/blogs/search" method="get" class="search-form">
   <input type="text" name="username" placeholder="Search by username">
   <button type="submit">Search</button>
 </form>
+</div>
 
 <% if (blogs.length === 0) { %>
   <p class="no-blogs">No blogs found.</p>
@@ -36,7 +38,7 @@
         </video>
       <% } %>
 
-      <a href="/blogs/<%= blog._id %>" class="blog-link">View Details</a>
+      <a href="/blogs/<%= blog._id %>" class="blog-link-index">View Details</a>
     </div>
   <% }) %>
 </div>

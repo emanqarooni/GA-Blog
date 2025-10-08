@@ -5,31 +5,40 @@ body {
   margin: 0;
   padding: 0;
 }
-
 h1 {
-  text-align: center;
-  margin-top: 2rem;
   font-size: 2rem;
   color: #ed1c24;
 }
-
-/* --- Search Form --- */
-.search-form {
+/* ================================
+   BLOG TOP (Title + Search)
+================================ */
+.blog-top {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin: 1.5rem auto;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 70px auto;
+  padding: 0 1rem;
 }
-
-.search-form input {
+.blog-top h1 {
+  text-align: left;
+  margin: 0;
+  color: #ed1c24;
+}
+.blog-top .search-form {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin: 0;
+}
+.blog-top .search-form input {
   padding: 0.6rem 1rem;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 1rem;
   width: 250px;
 }
-
-.search-form button {
+.blog-top .search-form button {
   background-color: #ed1c24;
   color: #fff;
   border: none;
@@ -40,57 +49,74 @@ h1 {
   font-weight: 600;
   transition: background-color 0.3s ease;
 }
-
-.search-form button:hover {
+.blog-top .search-form button:hover {
   background-color: #c2171e;
 }
-
-/* --- Blog Grid Layout --- */
+/* ================================
+   BLOG GRID + CARDS
+================================ */
 .blogs-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
   max-width: 1200px;
   margin: 2rem auto;
   padding: 0 1rem;
 }
-
-/* --- Blog Card --- */
 .blog-card {
+  position: relative;
   background-color: #fff;
-  color:black;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  padding: 1.5rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: black;
+  width: 300px;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: none;
+  transition: transform 0.3s ease;
+  z-index: 3;
 }
 
+.blog-card::before {
+  content: "";
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  width: 100%;
+  height: 100%;
+  border: 2px solid white;
+  z-index: 1;
+  transition: all 0.3s ease;
+  border-radius: 20px;
+  pointer-events: none;
+}
 .blog-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
-
 .blog-header {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
+  position: relative;
+  z-index: 5;
 }
-
 .blog-header img {
   border-radius: 50%;
   width: 55px;
   height: 55px;
   object-fit: cover;
 }
-
 .blog-description {
   font-size: 1rem;
   margin-bottom: 1rem;
   color: #444;
   line-height: 1.5;
+  position: relative;
+  z-index: 5;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
-
 .blog-image,
 .blog-video {
   border-radius: 12px;
@@ -98,47 +124,570 @@ h1 {
   max-height: 200px;
   object-fit: cover;
   margin-bottom: 1rem;
+  position: relative;
+  z-index: 5;
 }
-
-.blog-link {
+/* ================================
+   VIEW DETAILS LINK (blog-link-index)
+================================ */
+.blog-link-index {
   display: inline-block;
   background-color: #ed1c24;
   color: #fff;
   text-decoration: none;
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-  font-weight: 500;
+  padding: 0.7rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  width: 80%;
 }
-
-.blog-link:hover {
+.blog-link-index:hover {
+  background-color: #c2171e;
+  transform: translateY(-2px);
+}
+/* ================================
+   ADD BLOG BUTTON
+================================ */
+.add-blog-container {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+.add-blog-btn {
+  background-color: #ed1c24;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+.add-blog-btn:hover {
   background-color: #c2171e;
 }
-
+/* ================================
+   BLOG ACTION BUTTONS
+================================ */
+.blog-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  position: relative;
+  z-index: 10;
+}
+.blog-actions a,
+.blog-actions button {
+  text-decoration: none;
+  flex: 1;
+  text-align: center;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: relative;
+  z-index: 11;
+}
+.blog-actions .blog-link {
+  background-color: #ed1c24;
+  color: white;
+}
+.blog-actions .blog-link:hover {
+  background-color: #c2171e;
+}
+.blog-actions .edit-btn {
+  background-color: #444;
+  color: white;
+}
+.blog-actions .edit-btn:hover {
+  background-color: #666;
+}
+.blog-actions .delete-btn {
+  background-color: #ff4d4d;
+  color: white;
+}
+.blog-actions .delete-btn:hover {
+  background-color: #d93636;
+}
+.delete-form {
+  margin: 0;
+}
+/* create page */
+.create-layout {
+  max-width: 600px;
+  margin: 4rem auto;
+  padding: 2.5rem;
+  background-color: #1a1a1a;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(161, 8, 8, 0.1);
+  color: white;
+  font-family: "Alan Sans", sans-serif;
+  text-align: center;
+}
+/* Heading */
+.create-layout h2 {
+  font-size: 2rem;
+  color: #ed1c24;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+/* Form Layout */
+.create-layout form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* Labels */
+.create-layout label {
+  width: 80%;
+  text-align: left;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+/* Input Fields */
+.create-layout input[type="text"],
+.create-layout input[type="file"] {
+  width: 80%;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #555;
+  background-color: #222;
+  color: #fff;
+  font-size: 1rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+.create-layout input[type="text"]:focus,
+.create-layout input[type="file"]:focus {
+  border-color: #ed1c24;
+  background-color: #2a2a2a;
+  outline: none;
+}
+/* Button */
+.create-layout button {
+  width: 50%;
+  padding: 1rem;
+  background-color: #ed1c24;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 0.5rem;
+}
+.create-layout button:hover {
+  background-color: #c2171e;
+}
+/* edit page */
+.edit-blog {
+  max-width: 700px;
+  margin: 4rem auto;
+  padding: 2.5rem;
+  background-color: #1a1a1a;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(161, 8, 8, 0.1);
+  color: white;
+  font-family: "Alan Sans", sans-serif;
+  text-align: center;
+}
+/* Heading */
+.edit-blog h1 {
+  font-size: 2rem;
+  color: #ed1c24;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+/* Form Layout */
+.edit-blog form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* Labels */
+.edit-blog label {
+  width: 90%;
+  text-align: left;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+/* Input Fields */
+.edit-blog input[type="text"],
+.edit-blog input[type="file"] {
+  width: 90%;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #555;
+  background-color: #222;
+  color: #fff;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+.edit-blog input[type="text"]:focus,
+.edit-blog input[type="file"]:focus {
+  border-color: #ed1c24;
+  background-color: #2a2a2a;
+  outline: none;
+}
+/* Current Images Grid */
+.current-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.current-images img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #555;
+}
+/* Video Preview */
+.edit-blog video {
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  background-color: #000;
+}
+/* Button */
+.edit-blog button {
+  width: 50%;
+  padding: 1rem;
+  background-color: #ed1c24;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+.edit-blog button:hover {
+  background-color: #c2171e;
+}
+/* Paragraphs for current media */
+.edit-blog p {
+  width: 90%;
+  text-align: left;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #ccc;
+}
+/* ================================
+  EMPTY STATE
+================================ */
 .no-blogs {
   text-align: center;
   color: #666;
   font-style: italic;
 }
-
-/* --- Responsive Design --- */
-@media (max-width: 992px) {
-  .blogs-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* ================================
+   BLOG DETAILS PAGE
+================================ */
+.blog-details-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 2rem;
+  background-color: #111;
+  color: #fff;
+  min-height: 100vh;
 }
 
-@media (max-width: 600px) {
-  .blogs-grid {
-    grid-template-columns: 1fr;
-  }
+.page-title {
+  font-size: 2.5rem;
+  color: #ed1c24;
+  margin-bottom: 2rem;
+  text-align: center;
+}
 
-  .search-form {
-    flex-direction: column;
-    align-items: center;
-  }
+.blog-details-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3rem;
+  width: 100%;
+  max-width: 1200px;
+}
 
-  .search-form input {
-    width: 80%;
-  }
+.blog-left {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.fav-section {
+  width: 94%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background-color: #1c1c1c;
+  padding: 0.8rem 1.2rem;
+  border-radius: 10px;
+}
+
+.fav-info {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.star-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.star-btn.active {
+  color: #ffd700;
+}
+
+.star-btn:hover {
+  color: #ffd700;
+}
+
+.star-btn.disabled {
+  color: #444;
+  cursor: not-allowed;
+}
+
+.blog-description-box {
+  text-align: left;
+  background-color: #1c1c1c;
+  padding: 1.2rem 1.5rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 650px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.blog-description-box .desc-title {
+  color: #ed1c24;
+  margin-bottom: 0.6rem;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.blog-description-box .desc-text {
+  color: #ccc;
+  line-height: 1.6;
+  font-size: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.blog-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.blog-images img.blog-media {
+  width: 280px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.blog-images img.blog-media:hover {
+  transform: scale(1.05);
+}
+
+.blog-left video.blog-media {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  margin-top: 1rem;
+}
+
+/* RIGHT SIDE -------------------- */
+.blog-right {
+  flex: 0.8;
+  background-color: #1a1a1a;
+  padding: 1.5rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.blog-right h2 {
+  color: #ed1c24;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Comment Form */
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.comment-form textarea {
+  background-color: #111;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 0.8rem;
+  resize: none;
+  height: 100px;
+}
+
+.submit-btn {
+  background-color: #ed1c24;
+  color: white;
+  border: none;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #ff3333;
+}
+
+/* Comments list */
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.comment-item {
+  background-color: #222;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: left;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.comment-user {
+  color: #ed1c24;
+  font-weight: 600;
+}
+
+.comment-date {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.comment-message {
+  color: #ddd;
+  line-height: 1.4;
+  font-size: 1rem;
+}
+
+/* ================================
+   EDIT & DELETE COMMENT BUTTONS
+================================ */
+.comment-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.comment-actions form {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.comment-actions input[type="text"] {
+  background-color: #111;
+  border: 1px solid #333;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
+  width: 150px;
+  transition: all 0.3s ease;
+}
+
+.comment-actions input[type="text"]:focus {
+  border-color: #ed1c24;
+  outline: none;
+  background-color: #1a1a1a;
+}
+
+/* Button base */
+.comment-actions .edit-btn,
+.comment-actions .delete-btn {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ✏️ Edit button */
+.comment-actions .edit-btn {
+  background: linear-gradient(135deg, #333, #555);
+  color: #fff;
+  border: 1px solid #777;
+}
+
+.comment-actions .edit-btn:hover {
+  background: linear-gradient(135deg, #ed1c24, #c2171e);
+  color: #fff;
+  border-color: #ed1c24;
+  transform: translateY(-2px);
+}
+
+/* 🗑️ Delete button */
+.comment-actions .delete-btn {
+  background: linear-gradient(135deg, #ff4d4d, #c2171e);
+  color: #fff;
+  border: 1px solid #ff4d4d;
+}
+
+.comment-actions .delete-btn:hover {
+  background: linear-gradient(135deg, #ff6666, #ff1f1f);
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px rgba(255, 51, 51, 0.4);
 }

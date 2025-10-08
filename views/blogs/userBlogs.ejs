@@ -1,32 +1,50 @@
+<%- include("../partials/_header.ejs") %>
 <%- include("../partials/_navbar.ejs") %>
 
+<div class="blog-top">
 <h1>My Blogs</h1>
 
-<a href="/blogs/create">Add Blog</a>
+<div class="add-blog-container">
+  <a href="/blogs/create" class="add-blog-btn">Add Blog</a>
+</div>
+</div>
 
-<% blogs.forEach(blog => { %>
-  <div>
-    <div>
-      <img src="<%= blog.owner.image %>" alt="profile picture" width="50">
-      <p><%= blog.owner.username %></p>
-      <p>Created at: <%= blog.createdAt.toLocaleString() %></p>
-    </div>
-    <p><%= blog.description %></p>
-    <% if (blog.images && blog.images.length > 0) { %>
-      <% blog.images.forEach(img => { %>
-        <img src="/<%= img %>" width="200">
-      <% }) %>
-    <% } %>
-    <% if (blog.video) { %>
-      <video controls width="300">
-        <source src="/<%= blog.video %>" type="video/mp4">
-      </video>
-    <% } %>
+<% if (blogs.length === 0) { %>
+  <p class="no-blogs">No blogs found.</p>
+<% } %>
 
-    <a href="/blogs/<%= blog._id %>">Details</a>
-    <a href="/blogs/<%= blog._id %>/edit">Edit</a>
-    <form action="/blogs/<%= blog._id %>?_method=DELETE" method="post">
-      <button type="submit">Delete</button>
+<div class="blogs-grid">
+  <% blogs.forEach(blog => { %>
+    <div class="blog-card">
+      <div class="blog-header">
+        <img src="<%= blog.owner.image %>" alt="profile picture">
+        <div>
+          <p class="username"><strong><%= blog.owner.username %></strong></p>
+          <p class="date"><%= blog.createdAt.toLocaleDateString() %></p>
+        </div>
+      </div>
+
+      <p class="blog-description"><%= blog.description %></p>
+
+      <% if (blog.images && blog.images.length > 0) { %>
+        <img src="/<%= blog.images[0] %>" alt="blog image" class="blog-image">
+      <% } %>
+
+      <% if (blog.video) { %>
+        <video controls class="blog-video">
+          <source src="/<%= blog.video %>" type="video/mp4">
+        </video>
+      <% } %>
+
+      <div class="blog-actions">
+
+            <a href="/blogs/<%= blog._id %>" class="blog-link">Details</a>
+    <a href="/blogs/<%= blog._id %>/edit" class="edit-btn">Edit</a>
+    <form action="/blogs/<%= blog._id %>?_method=DELETE" method="post" class="delete-form">
+      <button type="submit" class="delete-btn">Delete</button>
     </form>
-  </div>
-<% }) %>
+      </div>
+    </div>
+  <% }) %>
+</div>
+<%- include("../partials/_footer.ejs") %>

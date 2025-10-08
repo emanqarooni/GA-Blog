@@ -1,18 +1,27 @@
+<%- include("../partials/_header.ejs") %>
 <%- include('../partials/_navbar.ejs') %>
-<img src="<%= user.image %>" alt="Profile picture" />
-<h1><%= user.first_name %> <%= user.last_name %></h1>
-<p>Username: <%= user.username %></p>
-<p>Gmail: <%= user.gmail %></p>
-<% if (user&& favoritedBlogs.length === 0) { %>
-  <p>no favorites</p>
-<%} else {%>
-  <p>Favorited Blogs</p>
-  <ul>
-  <% favoritedBlogs.forEach(blog => { %>
-    <li>
-    <a href="/blogs/<%= blog._id %>" > <%= blog.description %> </a>
-    </li>
-<% }) %>
-</ul>
-<%}%>
-<a href="/users/profile/<%= user._id  %>/edit">Edit profile</a>
+
+<div class="profile-layout">
+  <div class="details">
+    <img src="<%= user.image %>" alt="Profile picture" />
+    <h1><%= user.first_name %> <%= user.last_name %></h1>
+    <p>Username: <%= user.username %></p>
+    <p>Gmail: <%= user.gmail %></p>
+
+    <a href="/users/profile/<%= user._id  %>/edit" class="edit-profile">Edit profile</a>
+  </div>
+  <div class="favorites">
+    <% if (user && favoritedBlogs.length === 0) { %>
+      <p>No favorites</p>
+    <% } else { %>
+      <p>Favorited Blogs</p>
+      <div class="favorites-list">
+        <% favoritedBlogs.forEach(blog => { %>
+          <div class="favorite-item">
+            <a href="/blogs/<%= blog._id %>"><%= blog.description %></a>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</div>

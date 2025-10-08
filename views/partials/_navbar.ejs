@@ -1,14 +1,48 @@
 <nav>
+  <div class="nav-left">
+    <img src="/images/logo.png" alt="General Assembly Logo">
+  </div>
+
   <% if (user) { %>
-  <p>welcome to the <%= user.username %></p>
-  <a href="/users/profile/<%= user._id %>">Profile</a>
-  <a href="/blogs/create">Add a new Blog</a>
-  <a href="/blogs/userBlogs">My Blogs</a>
-  <a href="/blogs">All Blogs</a>
-  <a href="/auth/sign-out">Sign Out</a>
-  <% } else { %>
-  <p>welcome to the App. Guest</p>
-  <a href="/auth/sign-up">Sign Up</a>
-  <a href="/auth/sign-in">Sign In</a>
+  <div class="nav-center">
+    <a href="/blogs/userBlogs">My Blogs</a>
+    <a href="/blogs">All Blogs</a>
+  </div>
+
+  <div class="nav-right">
+
+      <img src="<%= user.image %>"  alt="Profile" class="profile-pic" id="profilePic">
+      <%= console.log("User image:", user.image) %>
+
+      <div class="profile-dropdown" id="profileDropdown">
+        <p class="profile-dropdown-username"><%= user.username %></p>
+        <a href="/users/profile/<%= user._id %>">Profile</a>
+        <a href="/auth/sign-out">Sign Out</a>
+      </div>
+    <% } else { %>
+      <a href="/auth/sign-in">Sign In</a>
+      <a href="/auth/sign-up">Sign Up</a>
+  </div>
   <% } %>
 </nav>
+
+<script>
+  // Toggle profile dropdown
+  document.addEventListener('DOMContentLoaded', () => {
+    const profilePic = document.getElementById('profilePic');
+    const dropdown = document.getElementById('profileDropdown');
+
+    if (profilePic) {
+      profilePic.addEventListener('click', () => {
+        dropdown.classList.toggle('active');
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!profilePic.contains(e.target) && !dropdown.contains(e.target)) {
+          dropdown.classList.remove('active');
+        }
+      });
+    }
+  });
+</script>
