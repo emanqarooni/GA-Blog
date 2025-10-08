@@ -5,16 +5,14 @@ const nodemailer = require("nodemailer")
 
 //API's main functionlaity/logic
 exports.auth_signup_get = async (req, res) => {
-  res.render("auth/sign-up.ejs", { message: null })
+  res.render("auth/sign-up.ejs", {message: null})
 }
 
 exports.auth_signup_post = async (req, res) => {
   //checking if the username exists or not
   const userInDatabase = await User.findOne({ username: req.body.username })
   if (userInDatabase) {
-    return res.render("auth/sign-up.ejs", {
-      error: "Username is already taken",
-    })
+    return res.render("auth/sign-up.ejs", { error: "Username is already taken" })
   }
 
   const password = req.body.password
@@ -24,16 +22,13 @@ exports.auth_signup_post = async (req, res) => {
   let hasNumber = /[0-9]/.test(password)
 
   if (!hasUppercase || !hasLowercase || !hasNumber) {
-    return res.render("auth/sign-up.ejs", {
-      error:
-        "Password must include atleast one capital letter, one small letter and one number ",
-    })
+    return res.render( "auth/sign-up.ejs", { error:
+      "Password must include atleast one capital letter, one small letter and one number "}
+    )
   }
   //checking if the password and confirmpass are matching or not
   if (req.body.password !== req.body.confirmPassword) {
-    return res.render("auth/sign-up.ejs", {
-      error: "Password and confirm password must match",
-    })
+    return res.render("auth/sign-up.ejs", { error: "Password and confirm password must match"})
   }
 
   //encrypt password
@@ -59,22 +54,20 @@ exports.auth_signup_post = async (req, res) => {
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     gender: req.body.gender,
-    image: imageUrl,
+    image: imageUrl
   })
   res.redirect("/")
 }
 
 exports.auth_signin_get = async (req, res) => {
-  res.render("index.ejs", { error: null })
+  res.render("index.ejs", {error: null})
 }
 
 exports.auth_signin_post = async (req, res) => {
   //checking if the username exists or not
   const userInDatabase = await User.findOne({ username: req.body.username })
   if (!userInDatabase) {
-    return res.render("index.ejs", {
-      error: "Login failed, user does not exist",
-    })
+    return res.render("index.ejs", {error: "Login failed, user does not exist"})
   }
 
   const validPassword = bcrypt.compareSync(
@@ -84,16 +77,14 @@ exports.auth_signin_post = async (req, res) => {
 
   //checking if the password is correct
   if (!validPassword) {
-    return res.render("index.ejs", {
-      error: "Login failed, password is incorrect",
-    })
+    return res.render("index.ejs", {error: "Login failed, password is incorrect"})
   }
 
   //iniitliaze session
   req.session.user = {
     username: userInDatabase.username,
     _id: userInDatabase._id,
-    image: userInDatabase.image,
+    image: userInDatabase.image
   }
 
   res.redirect("/blogs")
@@ -107,7 +98,7 @@ exports.auth_signout_get = async (req, res) => {
 //here i will do the forget password functionality
 //I used this website for help / https://medium.com/@kanishksinghmaurya/reset-password-forget-password-implementation-using-node-js-mongodb-nodemailer-jwt-7b2fe9597ca1
 exports.auth_forgetpass_get = async (req, res) => {
-  res.render("auth/forget-password.ejs", { message: null, error: null })
+  res.render("auth/forget-password.ejs",  { message: null, error: null })
 }
 exports.auth_forgetpass_post = async (req, res) => {
   const { gmail } = req.body
@@ -115,7 +106,7 @@ exports.auth_forgetpass_post = async (req, res) => {
   const user = await User.findOne({ gmail })
 
   if (!user) {
-    return res.render("auth/forget-password.ejs", { error: "email not found" })
+    return res.render("auth/forget-password.ejs",  { error: "email not found"})
   }
   const token = crypto.randomBytes(20).toString("hex")
   user.resetPasswordToken = token
@@ -150,8 +141,8 @@ exports.auth_forgetpass_post = async (req, res) => {
   })
 
   res.render("auth/forget-password.ejs", {
-    message: "Password reset email has been sent! Please check your inbox.",
-  })
+  message: "Password reset email has been sent! Please check your inbox."
+})
 }
 
 //now to put a new password
@@ -165,7 +156,7 @@ exports.auth_newpass_get = async (req, res) => {
   // if (!user || user.resetPasswordExpires < Date.now()) {
   //   return res.send("Password reset token is invalid or has expired")
   // }
-  res.render("auth/new-password.ejs", { token, error: null, message: null })
+  res.render("auth/new-password.ejs", { token, error: null, message: null})
 }
 exports.auth_newpass_post = async (req, res) => {
   const token = req.params.token
@@ -183,11 +174,11 @@ exports.auth_newpass_post = async (req, res) => {
   //   return res.send("Token is invalid or has expired")
   // }
 
-  if (password !== confirmPassword) {
+   if (password !== confirmPassword) {
     return res.render("auth/new-password.ejs", {
       token,
       message: null,
-      error: "Passwords do not match",
+      error: "Passwords do not match"
     })
   }
 
@@ -198,8 +189,8 @@ exports.auth_newpass_post = async (req, res) => {
   user.resetPasswordExpires = undefined
 
   await user.save()
-  res.render("index.ejs", {
+    res.render("index.ejs", {
     message: "Your password has been updated successfully! Please sign in.",
-    error: null,
+    error: null
   })
 }
