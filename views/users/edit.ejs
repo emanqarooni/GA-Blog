@@ -1,30 +1,36 @@
+
+<%- include("../partials/_header.ejs") %>
 <%- include('../partials/_navbar.ejs') %>
-<form action="/users/profile/<%= user._id  %> " method="POST" enctype="multipart/form-data">
-<label for="image">Profile Image:</label>
-<input type="file" name="image">
-<button type="submit">submit</button>
-</form>
 
-<form action="/users/profile/<%=user._id %>?_method=PUT" method="POST">
-<label for="image">Profile Image:</label>
-<img src="<%=user.image%>">
+<div class="edit-layout">
+  <h2>Edit Profile</h2>
 
-<br>
-  <label for="first_name">First Name:</label>
-<input type="text" name="first_name" id="first_name" value="<%= user.first_name  %>"                   >
-<br>
-<label for="last_name">Last Name:</label>
-<input type="text" name="last_name" id="last_name" value="<%= user.last_name  %>" >
-<br>
-  <label for="username">Username:</label>
-<input type="text" name="username" id="username" value="<%= user.username  %>" >
-<br>
+  <form action="/users/profile/<%= user._id %>" method="POST" enctype="multipart/form-data">
+    <label for="image"></label>
+    <img src="<%= user.image %>" alt="Profile picture">
+    <input type="file" name="image">
+    <button type="submit">Update Image</button>
+  </form>
 
-<label for="gender">Gender:</label>
-<input type="text" name="gender" id="gender" value="<%= user.gender %>" >
-<br>
-<label for="gmail">Gmail:</label>
-<input type="text" name="gmail" id="gmail" value="<%= user.gmail %>" >
-<br>
-<button type="submit">Edit User</button>
-</form>
+  <hr style="margin:2rem 0; border:0.5px solid #555;">
+
+  
+  <form action="/users/profile/<%= user._id %>?_method=PUT" method="POST">
+    <label for="first_name">First Name:</label>
+    <input type="text" name="first_name" id="first_name" value="<%= user.first_name %>">
+
+    <label for="last_name">Last Name:</label>
+    <input type="text" name="last_name" id="last_name" value="<%= user.last_name %>">
+
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username" value="<%= user.username %>">
+
+    <label for="gender">Gender:</label>
+    <input type="text" name="gender" id="gender" value="<%= user.gender %>">
+
+    <label for="gmail">Gmail:</label>
+    <input type="text" name="gmail" id="gmail" value="<%= user.gmail %>">
+
+    <button type="submit">Save Changes</button>
+  </form>
+</div>

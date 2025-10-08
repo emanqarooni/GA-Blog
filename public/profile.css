@@ -102,3 +102,87 @@ body {
   font-weight: 500;
 }
 
+/* now styling the the edit page */
+/* General form container */
+.edit-layout {
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #1a1a1a;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(161, 8, 8, 0.1);
+  color: white;
+  font-family: "Alan Sans", sans-serif;
+  text-align: center; /* centers heading and labels */
+}
+
+/* Headings */
+.edit-layout h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #ed1c24;
+}
+
+/* Form alignment */
+.edit-layout form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centers inputs and labels */
+}
+
+/* Labels */
+.edit-layout label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  width: 80%; /* keeps labels aligned with input width */
+  text-align: left; /* label text stays left-aligned inside centered form */
+}
+
+/* Inputs */
+.edit-layout input[type="text"],
+.edit-layout input[type="file"],
+.edit-layout input[type="email"],
+.edit-layout select {
+  width: 80%; /* not full width, looks centered */
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #555;
+  background-color: #222;
+  color: #fff;
+  font-size: 1rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Profile image */
+.edit-layout img {
+  display: block;
+  margin: 0.5rem auto 1.5rem auto;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Submit button */
+.edit-layout button {
+  width: 50%; /* smaller width for centered look */
+  padding: 1rem;
+  background-color: #ed1c24;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 1rem auto 0 auto; /* center horizontally */
+}
+
+.edit-layout button:hover {
+  background-color: #c2171e;
+}
