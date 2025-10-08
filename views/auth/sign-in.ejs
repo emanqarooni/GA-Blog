@@ -1,4 +1,6 @@
-<%- include("../partials/_navbar.ejs") %>
+<%- include("../partials/_header.ejs") %>
+<!-- <%- include("../partials/_navbar.ejs") %> -->
+<div class="signin-layout">
 <h1>Sign In</h1>
 
 <form action="/auth/sign-in" method="post">
@@ -13,4 +15,7 @@
 <button type="submit">SignIn</button>
 
 </form>
+<div class="signin-links">
 <a href="/auth/forget-password">Reset Password</a>
+</div>
+</div>
