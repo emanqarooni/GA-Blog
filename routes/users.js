@@ -12,4 +12,4 @@ router.post(
   userCtrl.user_update_put
 )
 router.put("/profile/:userId", userCtrl.user_update_put)
-module.exports = route
+module.exports = router
