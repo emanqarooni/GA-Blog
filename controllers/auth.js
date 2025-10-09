@@ -12,7 +12,7 @@ exports.auth_signup_post = async (req, res) => {
   //checking if the username exists or not
   const userInDatabase = await User.findOne({ username: req.body.username })
   if (userInDatabase) {
-    return res.render("auth/sign-up.ejs", { error: "Username is already taken" })
+    return res.render("auth/sign-up.ejs", { message: "Username is already taken" })
   }
 
   const password = req.body.password
@@ -22,13 +22,13 @@ exports.auth_signup_post = async (req, res) => {
   let hasNumber = /[0-9]/.test(password)
 
   if (!hasUppercase || !hasLowercase || !hasNumber) {
-    return res.render( "auth/sign-up.ejs", { error:
+    return res.render( "auth/sign-up.ejs", { message:
       "Password must include atleast one capital letter, one small letter and one number "}
     )
   }
   //checking if the password and confirmpass are matching or not
   if (req.body.password !== req.body.confirmPassword) {
-    return res.render("auth/sign-up.ejs", { error: "Password and confirm password must match"})
+    return res.render("auth/sign-up.ejs", { message: "Password and confirm password must match"})
   }
 
   //encrypt password
@@ -174,7 +174,7 @@ exports.auth_newpass_post = async (req, res) => {
   //   return res.send("Token is invalid or has expired")
   // }
 
-   if (password !== confirmPassword) {
+  if (password !== confirmPassword) {
     return res.render("auth/new-password.ejs", {
       token,
       message: null,
