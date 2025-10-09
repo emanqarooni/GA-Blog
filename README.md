@@ -1,8 +1,8 @@
 # GA-Blog
 ## Date: 1/10/2025
 ### By: Rabab Hasan Isa and Eman Qarooni
-#### [Eman Qarooni GitHub] https://github.com/emanqarooni
-#### [Rabab Hasan GitHub] https://github.com/Rabab-hasan177
+#### [Eman Qarooni GitHub] (https://github.com/emanqarooni)
+#### [Rabab Hasan GitHub] (https://github.com/Rabab-hasan177)
 
 ***
 ### Description
@@ -17,10 +17,10 @@ Blog website for our class daily life, where you can post a comment, a picture o
 * Visual Studio Code
 ***
 ### ***Project Link***
-#### [GitHub] https://github.com/emanqarooni/GA-Blog
+#### [GitHub] (https://github.com/emanqarooni/GA-Blog)
 
 ### ***Trello Link***
-#### [Trello] https://trello.com/b/LSCo1Mg8/project-2-personal-blog
+#### [Trello] (https://trello.com/b/LSCo1Mg8/project-2-personal-blog)
 
 ***
 ### ***ERD***
