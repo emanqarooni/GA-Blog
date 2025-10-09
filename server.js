@@ -24,8 +24,6 @@ app.use(
 app.use(express.static("public"))
 app.use('/public/uploads', express.static('public/uploads'))
 app.use(passUserToView)
-// const path= require("path")
-// app.use(express.static(path.join(__dirname, "public")))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 //setting up routers
