@@ -1,7 +1,7 @@
 # GA-Blog
 ## Date: 1/10/2025
-### By: Rabab Hasan Isa, Eman Qarooni and Zainab Ebrahim
-#### [GitHub] https://github.com/emanqarooni/GA-Blog
+### By: Rabab Hasan Isa and Eman Qarooni
+
 ***
 ### Description
 Blog website for our class daily life, where you can post a comment, a picture or a video and others users can interact with your posts.
@@ -14,8 +14,8 @@ Blog website for our class daily life, where you can post a comment, a picture o
   * ejs
   * Visual Studio Code
 ***
-### ***Getting Started***
-Website link [here]
+### ***Project Link***
+#### [GitHub] https://github.com/emanqarooni/GA-Blog
 
 ***
 ### ***ERD***
@@ -33,7 +33,20 @@ Website link [here]
 ![image](./wireframe.images/Screenshot%20(45).png)
 ![image](./wireframe.images/Screenshot%20(47).png)
 
+### ***Website***
+![image](./views/prototype.images/Screenshot%20(58).png)
+![image](./views/prototype.images/Screenshot%20(59).png)
+![image](./views/prototype.images/Screenshot%20(60).png)
+![image](./views/prototype.images/Screenshot%20(61).png)
+![image](./views/prototype.images/Screenshot%20(63).png)
+![image](./views/prototype.images/Screenshot%20(64).png)
+![image](./views/prototype.images/Screenshot%20(65).png)
+![image](./views/prototype.images/Screenshot%20(66).png)
+![image](./views/prototype.images/Screenshot%20(67).png)
 
-### ***Future Updates*
-***
 ### ***Credits***
+### [nodemailer] https://medium.com/@kanishksinghmaurya/reset-password-forget-password-implementation-using-node-js-mongodb-nodemailer-jwt-7b2fe9597ca1
+
+### [multer] https://www.npmjs.com/package/multer
+
+### [nodemailer] https://nodemailer.com/
