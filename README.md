@@ -1,8 +1,8 @@
 # GA-Blog
 ## Date: 1/10/2025
 ### By: Rabab Hasan Isa and Eman Qarooni
-#### [Eman Qarooni GitHub] (https://github.com/emanqarooni)
-#### [Rabab Hasan GitHub] (https://github.com/Rabab-hasan177)
+#### [Eman Qarooni GitHub](https://github.com/emanqarooni)
+#### [Rabab Hasan GitHub](https://github.com/Rabab-hasan177)
 
 ***
 ### Description
@@ -17,10 +17,10 @@ Blog website for our class daily life, where you can post a comment, a picture o
 * Visual Studio Code
 ***
 ### ***Project Link***
-#### [GitHub] (https://github.com/emanqarooni/GA-Blog)
+#### [GitHub](https://github.com/emanqarooni/GA-Blog)
 
 ### ***Trello Link***
-#### [Trello] (https://trello.com/b/LSCo1Mg8/project-2-personal-blog)
+#### [Trello](https://trello.com/b/LSCo1Mg8/project-2-personal-blog)
 
 ***
 ### ***ERD***
@@ -50,16 +50,16 @@ Blog website for our class daily life, where you can post a comment, a picture o
 ![image](./views/prototype.images/Screenshot%20(67).png)
 
 ### ***Credits***
-### [nodemailer] (https://medium.com/@kanishksinghmaurya/reset-password-forget-password-implementation-using-node-js-mongodb-nodemailer-jwt-7b2fe9597ca1)
+### [nodemailer](https://medium.com/@kanishksinghmaurya/reset-password-forget-password-implementation-using-node-js-mongodb-nodemailer-jwt-7b2fe9597ca1)
 
-### [multer] (https://www.npmjs.com/package/multer)
+### [multer](https://www.npmjs.com/package/multer)
 
-### [nodemailer] https://nodemailer.com/
+### [nodemailer](https://nodemailer.com/)
 
-### [sorting] https://mongoosejs.com/docs/api/query.html#Query.prototype.sort()
+### [sorting](https://mongoosejs.com/docs/api/query.html#Query.prototype.sort())
 
-### [stackoverflow] https://stackoverflow.com/questions/17755147/displaying-an-image-with-ejs-in-node-js-express
+### [stackoverflow](https://stackoverflow.com/questions/17755147/displaying-an-image-with-ejs-in-node-js-express)
 
-### [devAnswers] https://how.dev/answers/what-is-reqquery-in-expressjs
+### [devAnswers](https://how.dev/answers/what-is-reqquery-in-expressjs)
 
-### [w3schools] https://www.w3schools.com/howto/howto_js_search_menu.asp
+### [w3schools](https://www.w3schools.com/howto/howto_js_search_menu.asp)
