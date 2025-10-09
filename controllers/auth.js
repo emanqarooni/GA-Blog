@@ -153,9 +153,6 @@ exports.auth_newpass_get = async (req, res) => {
     resetPasswordToken: token,
     resetPasswordExpires: { $gt: Date.now() },
   })
-  // if (!user || user.resetPasswordExpires < Date.now()) {
-  //   return res.send("Password reset token is invalid or has expired")
-  // }
   res.render("auth/new-password.ejs", { token, error: null, message: null})
 }
 exports.auth_newpass_post = async (req, res) => {
@@ -169,10 +166,6 @@ exports.auth_newpass_post = async (req, res) => {
     resetPasswordExpires: { $gt: Date.now() },
   })
   console.log("user", user)
-
-  // if (!user || user.resetPasswordExpires < Date.now()) {
-  //   return res.send("Token is invalid or has expired")
-  // }
 
    if (password !== confirmPassword) {
     return res.render("auth/new-password.ejs", {
